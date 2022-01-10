@@ -1,5 +1,7 @@
 ﻿using System;
 using DatastructureAlgorithms.Linked_Lists;
+using DatastructureAlgorithms.Stack;
+using DatastructureAlgorithms.Queue;
 
 namespace DatastructureAlgorithms
 {
@@ -7,7 +9,6 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            LinkedLists lists = new LinkedLists();
             string input = "";
             do
             {
