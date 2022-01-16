@@ -2,14 +2,13 @@ namespace DatastructureAlgorithms.Trees
 {
     public class TreeNode
     {
-        public TreeNode _left;
-        public TreeNode _right;
-        public int _val;
-        public TreeNode(TreeNode left = null, TreeNode right = null, int val = 0)
+        public TreeNode Left;
+        public TreeNode Right;
+        public int Key;
+        public TreeNode(int key = 0)
         {
-            this._left = left;
-            this._right = right;
-            this._val = val;
+            this.Left = this.Right = null;
+            this.Key = key;
         }
     }
 }

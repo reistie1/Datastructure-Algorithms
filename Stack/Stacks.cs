@@ -17,7 +17,7 @@ namespace DatastructureAlgorithms.Stack
             return _stack.AddToStart(val);
         }
 
-        public ListNode Peek()
+        public ListNode peek()
         {
             return _stack._head;
         }
