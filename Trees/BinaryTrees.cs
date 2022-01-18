@@ -58,50 +58,50 @@ namespace DatastructureAlgorithms.BinaryTree
         }
 
 
-        public void InsertTreeNode(int val)
+        public void InsertTreeNode(int value)
         {
-            this.root = InsertNode(this.root, val);
+            this.root = InsertNode(this.root, value);
         }
 
-        private TreeNode InsertNode(TreeNode root, int val)
+        private TreeNode InsertNode(TreeNode root, int value)
         {
             if(root == null)
             {
-                root = new TreeNode(val);
+                root = new TreeNode(value);
                 return root;
             }
 
-            if(val < root.Key)
+            if(value < root.Key)
             {
-                root.Left = InsertNode(root.Left, val);
+                root.Left = InsertNode(root.Left, value);
             }
 
-            else if(val > root.Key)
+            else if(value > root.Key)
             {
-                root.Right = InsertNode(root.Right, val);
+                root.Right = InsertNode(root.Right, value);
             }
             return root;
         }
 
-        public bool DeleteNode(int val)
+        public bool DeleteNode(int value)
         {
-            return DeleteTreeNode(this.root, val) == null ? false : true;
+            return DeleteTreeNode(this.root, value) == null ? false : true;
         }
 
-        private TreeNode DeleteTreeNode(TreeNode node, int val)
+        private TreeNode DeleteTreeNode(TreeNode node, int value)
         {
             if(node == null)
             {
                 return node;
             }
 
-            if(val < node.Key)
+            if(value < node.Key)
             {
-                node.Right = DeleteTreeNode(node.Left, val);
+                node.Right = DeleteTreeNode(node.Left, value);
             }
-            else if(val > node.Key)
+            else if(value > node.Key)
             {
-                node.Left = DeleteTreeNode(node.Right, val);
+                node.Left = DeleteTreeNode(node.Right, value);
             }
             else
             {
@@ -130,24 +130,24 @@ namespace DatastructureAlgorithms.BinaryTree
             return null;
         }
 
-        public bool Search(int val)
+        public bool Search(int value)
         {
-            return SearchTree(this.root, val) == null ? false : true;
+            return SearchTree(this.root, value) == null ? false : true;
         }
 
-        private TreeNode SearchTree(TreeNode node, int val)
+        private TreeNode SearchTree(TreeNode node, int value)
         {
-            if(node.Key == val || node == null)
+            if(node.Key == value || node == null)
             {
                 return node;
             }
 
-            if(val > node.Key)
+            if(value > node.Key)
             {
-                return SearchTree(node.Right, val);
+                return SearchTree(node.Right, value);
             }
             
-            return SearchTree(node.Left, val);
+            return SearchTree(node.Left, value);
         }
     }
 }

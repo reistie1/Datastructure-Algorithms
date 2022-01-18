@@ -1,15 +1,15 @@
 namespace Datastructures_LinkedList
 {
-    public class ListNode
+    public class ListNode<T> where T : class
     {
-        public int _val;
-        public ListNode _next;
-        public ListNode _prev;
-        public ListNode(int val = 0, ListNode next = null, ListNode prev = null)
+        public T value;
+        public ListNode<T> next;
+        public ListNode<T> prev;
+        public ListNode(T value)
         {
-            this._val = val;
-            this._next = next;
-            this._prev = prev;
+            this.value = value;
+            this.next = null;
+            this.prev = null;
         }
     }
 }

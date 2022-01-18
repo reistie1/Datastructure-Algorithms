@@ -4,6 +4,8 @@ using DatastructureAlgorithms.Stack;
 using DatastructureAlgorithms.Queue;
 using DatastructureAlgorithms.BinaryTree;
 using DatastructureAlgorithms.DoublyLinkedList;
+using DatastructureAlgorithms.DataTypes;
+
 
 namespace DatastructureAlgorithms
 {
@@ -11,20 +13,10 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            // DoublyLinkedLists doublyLinked = new DoublyLinkedLists();
-            // doublyLinked.InsertAtStart(4);
-            // doublyLinked.InsertAtStart(32);
-            // doublyLinked.InsertAtStart(13);
-            // doublyLinked.InsertAtStart(8);
-            // doublyLinked.InsertAtStart(12);
-            // doublyLinked.InsertAtEnd(48);
-            // doublyLinked.InsertAfter(13, 99);
-            // doublyLinked.PrintForward();
-
-            //tree.PreOrder();
-            //tree.PostOrder();
-            //tree.DeleteNode(50);
-            //tree.InOrder();
+            // tree.PreOrder();
+            // tree.PostOrder();
+            // tree.DeleteNode(50);
+            // tree.InOrder();
             string input = "";
 
                 Console.WriteLine("Menu Options");

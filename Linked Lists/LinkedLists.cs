@@ -1,174 +1,119 @@
+using System.Collections.Generic;
 using Datastructures_LinkedList;
 using System;
 
 namespace DatastructureAlgorithms.Linked_Lists
 {
-    public class LinkedLists
+    public class LinkedLists<T> where T : class
     {
-        public ListNode _head;
-        public ListNode _tail;
-        public int _size;
+        public ListNode<T> head;
+        public ListNode<T> tail;
+        public int size;
         public LinkedLists()
         {
-            this._head = null;
-            this._tail = this._head;
-            this._size = 0;
+            this.head = null;
+            this.tail = this.head;
+            this.size = 0;
         }
 
-        public LinkedLists(ListNode head)
-        {
-            this._head = head;
-            this._tail = this._head;
-            this._size = 0;
-        }
-
-        public ListNode CreateList(int[] input_list)
+        public ListNode<T> CreateList(T[] input_list)
         {
             int index = 0;
 
             do
             {
-                this.InsertInOrder(input_list[index++]);
-                this._size += 1;
+                this.AddToEnd(input_list[index++]);
+                this.size++;
             }while(index <= input_list.Length - 1);
 
-            return this._head;
+            return this.head;
         }
 
-        public ListNode AddToStart(int value)
+        public ListNode<T> AddToStart(T value)
         {
-            ListNode newNode = new ListNode(value);
+            ListNode<T> newNode = new ListNode<T>(value);
 
-            if(this._head == null)
+            if(this.head == null)
             {
-                this._head = newNode;
-                this._tail = this._head;
-
-                return this._head;
-
-            }
-
-            newNode._next = this._head;
-
-            this._size += 1;
-            this._head = newNode;
-
-            return this._head;
-        }
-
-        public ListNode InsertInOrder(int value)
-        {
-            ListNode prev = null;
-            ListNode curr = null;
-            ListNode newNode = new ListNode(value);
-
-
-            if(this._head == null)
-            {
-                this._head = newNode;
-                this._tail = this._head;
-            }
-
-            prev = this._head;
-
-            do
-            {
-                if(newNode._val < this._head._val)
-                {
-                    newNode._next = this._head;
-                    this._head = newNode;
-                }
-
-                if(newNode._val > this._tail._val)
-                {
-                    this._tail._next = newNode;
-                    this._tail = newNode;
-                }
-
-                if(newNode._val > prev._val)
-                {
-                    curr = prev._next;
-
-                    if(newNode._val < curr._val)
-                    {
-                        prev._next = null;
-                        prev._next = newNode;
-                        newNode._next = curr;
-                    }
-                }
-
-                prev = prev._next;
-            }while(prev != null);
-
-            return this._head;
-        }
-
-        public ListNode AddToEnd(int value)
-        {
-            ListNode newNode = new ListNode(value);
-
-            if(this._tail == null)
-            {
-                this._tail = newNode;
-                this._head = newNode;
+                this.head = newNode;
+                this.tail = this.head;
             }
             else
             {
-                this._tail._next = newNode;
-                this._tail = newNode;
+                newNode.next = this.head;
+                this.head = newNode;
             }
+
+            this.size++;
             
-            this._size += 1;
+            return this.head;
+        }
+
+        public ListNode<T> AddToEnd(T value)
+        {
+            ListNode<T> newNode = new ListNode<T>(value);
+            ListNode<T> current = this.head;
+
+            if(current == null)
+            {
+                this.head = newNode;
+                this.tail = this.head;
+                this.size++;
+
+                return this.head;
+            }
 
 
-            return this._head;
+            this.tail.next = newNode;
+            this.tail = newNode;
+            this.size++;
+
+            return this.head;
         }
 
         public void printList()
         {
-            ListNode temp = this._head;
+            ListNode<T> temp = this.head;
             string result = "";
             do
             {
-                result += $"{temp._val} ->";
-                temp = temp._next;
+                result += $"{temp.value.ToString()} ->"; 
+                temp = temp.next;
             }while(temp != null);
 
-            Console.WriteLine(result);
+            Console.WriteLine(result); 
         }
 
-        public ListNode Delete(int val)
+        public ListNode<T> Delete(T value)
         {
-            ListNode temp1 = this._head;
-            ListNode temp2 = this._head._next;
+            ListNode<T> prev = null;
+            ListNode<T> curr = this.head;
 
-            if(this._head._val == val)
+            if(curr.value == value)
             {
-                this._head._next = null;
-                this._head = temp2;
-
-                return this._head;
+                this.head = this.head.next;
+                curr.next = null;
             }
 
             do
             {
-                temp2 = temp2._next;
-                temp1 = temp1._next;
-            }while(temp2._val != val);
+                prev = curr;
+                curr = curr.next;
+            }while(curr.value != value);
 
-            temp1._next = temp2._next;
-            temp2._next = null;
+            prev.next = curr.next;
+            curr.next = null;
 
-            return this._head;
+            return this.head;
         }
 
-        public ListNode RemoveFromHead()
+        public ListNode<T> RemoveFromStart()
         {
-            ListNode temp = this._head._next;
-            this._head._next = null;
-            this._head = temp;
+            ListNode<T> temp = this.head.next;
+            this.head.next = null;
+            this.head = temp;
 
-            return this._head;
+            return this.head;
         }
     }
 }

@@ -3,117 +3,161 @@ using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.DoublyLinkedList
 {
-    public class DoublyLinkedLists
+    public class DoublyLinkedLists<T> where T : class
     {
-        public ListNode head;
+        public ListNode<T>  head;
         public DoublyLinkedLists()
         {
             head = null;
         }
 
-        public ListNode InsertAtStart(int val)
+        public ListNode<T>  InsertAtStart(T value)
         {
             if(this.head == null)
             {
-                this.head = new ListNode(val);
+                this.head = new ListNode<T> (value);
             }
             else
             {
-                ListNode newNode = new ListNode(val);
-                newNode._next = this.head;
-                this.head._prev = newNode;
+                ListNode<T>  newNode = new ListNode<T> (value);
+                newNode.next = this.head;
+                this.head.prev = newNode;
                 this.head = newNode;
             }
 
             return this.head;
         }
 
-        public ListNode DeleteStart()
+        public ListNode<T>  DeleteStart()
         {
-            ListNode temp = this.head;
+            ListNode<T>  temp = this.head;
 
-            this.head = this.head._next;
-            this.head._prev = null;
-            temp._next = null;
+            this.head = this.head.next;
+            this.head.prev = null;
+            temp.next = null;
 
             return this.head;            
         }
 
-        public ListNode InsertAtEnd(int val)
+        public ListNode<T>  InsertAtEnd(T value)
         {
-            ListNode current = this.head;
-            ListNode newNode = new ListNode(val);
+            ListNode<T>  current = this.head;
+            ListNode<T>  newNode = new ListNode<T> (value);
             
-            while(current._next != null)
+            while(current.next != null)
             {
-                current = current._next;
+                current = current.next;
             }
 
-            current._next = newNode;
-            newNode._prev = current;
+            current.next = newNode;
+            newNode.prev = current;
             
             return this.head;
         }
 
-        public ListNode DeleteLast()
+        public ListNode<T>  DeleteLast()
         {
-            ListNode prev = null;
-            ListNode curr = this.head;
+            ListNode<T>  prev = null;
+            ListNode<T>  curr = this.head;
 
             do
             {
                 prev = curr;
-                curr = curr._next;
-            }while(curr._next != null);
+                curr = curr.next;
+            }while(curr.next != null);
 
-            prev._next = null;
-            curr._prev = null; 
+            prev.next = null;
+            curr.prev = null; 
 
             return this.head;
         }
 
-        public ListNode InsertAfter(int val, int newVal)
+        public ListNode<T>  InsertAfter(T value, T newvalue)
         {
-            ListNode prev = null;
-            ListNode curr = this.head;
-            ListNode newNode = new ListNode(newVal);
+            ListNode<T>  prev = null;
+            ListNode<T>  curr = this.head;
+            ListNode<T>  newNode = new ListNode<T> (newvalue);
 
             do
             {
                 prev = curr;
-                curr = curr._next;
-            }while(prev._val != val);
+                curr = curr.next;
+            }while(prev.value != value);
 
-            prev._next = newNode;
-            newNode._next = curr;
-            newNode._prev = prev;
-            curr._prev = newNode;
+            prev.next = newNode;
+            newNode.next = curr;
+            newNode.prev = prev;
+            curr.prev = newNode;
 
             return this.head;
         
         }
 
-        public void Delete()
+        public ListNode<T> Delete(T value)
         {
-            throw new NotImplementedException();
+            ListNode<T>  prev = null;
+            ListNode<T>  curr = this.head;
+
+            if(this.head.value == value)
+            {
+                this.head = this.head.next;
+                this.head.prev = null;
+                curr.next = null;
+
+                return this.head;
+            }
+
+            do
+            {
+                prev = curr;
+                curr = curr.next;
+            }while(curr.value != value);
+
+            if(curr.next == null)
+            {
+                prev.next = null;
+                curr.prev = null;
+
+                return this.head;
+            }
+
+            prev.next = curr.next;
+            curr.next.prev = prev;
+            curr.next = null;
+            curr.prev = null;
+
+            return this.head;
         }
 
         public void PrintForward()
         {
-            ListNode temp = this.head;
+            ListNode<T>  temp = this.head;
             string result = "";
 
             while(temp != null)
             {
-                result += temp._val + " -> ";
-                temp = temp._next;
+                result += temp.value + " -> ";
+                temp = temp.next;
             }
             Console.WriteLine(result);
         }
 
         public void PrintInReverse()
         {
-            throw new NotImplementedException();
+            ListNode<T>  temp = this.head;
+            string result = "";
+
+            while(temp.next != null)
+            {
+                temp = temp.next;
+            }
+
+            while(temp != null)
+            {
+                result += temp.value + " -> ";
+                temp = temp.prev;
+            }
+            Console.WriteLine(result);
         }
 
 

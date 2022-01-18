@@ -4,38 +4,38 @@ using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.Stack
 {
-    public class Stacks
+    public class Stacks<T> where T : class
     {
-        public LinkedLists _stack;
+        public LinkedLists<T> stack;
         public Stacks()
         {
-            _stack = new LinkedLists();
+            stack = new LinkedLists<T>();
         }
 
-        public ListNode push(int val)
+        public ListNode<T> Push(T value)
         {
-            return _stack.AddToStart(val);
+            return stack.AddToStart(value);
         }
 
-        public ListNode peek()
+        public ListNode<T> Peek()
         {
-            return _stack._head;
+            return stack.head;
         }
 
 
-        public void pop()
+        public void Pop()
         {
-            _stack.RemoveFromHead();
+            stack.RemoveFromStart();
         }
 
-        public int length()
+        public int Length()
         {
-            return _stack._size;
+            return stack.size;
         }
 
-        public void printStack()
+        public void ToList()
         {
-            _stack.printList();
+            stack.printList();
         }
     }
 }
