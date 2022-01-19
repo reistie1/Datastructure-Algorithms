@@ -29,6 +29,29 @@ namespace DatastructureAlgorithms.Linked_Lists
             return this.head;
         }
 
+        public T Search(T value)
+        {
+            ListNode<T> current = this.head;
+
+            if(this.head == null)
+            {
+                return null;
+            }
+
+            do
+            {
+                current = current.next;
+            }while(current != null && !current.value.Equals(value));
+
+            
+            if(current == null)
+            {
+                return null;
+            }
+
+            return current.value;
+        }
+
         public ListNode<T> AddToStart(T value)
         {
             ListNode<T> newNode = new ListNode<T>(value);

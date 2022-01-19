@@ -5,7 +5,9 @@ using DatastructureAlgorithms.Queue;
 using DatastructureAlgorithms.BinaryTree;
 using DatastructureAlgorithms.DoublyLinkedList;
 using DatastructureAlgorithms.DataTypes;
-
+using DatastructureAlgorithms.AVLTree;
+using DatastructureAlgorithms.AVLTreeNodes;
+using DatastructureAlgorithms.ArraySorting;
 
 namespace DatastructureAlgorithms
 {
@@ -13,6 +15,7 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
+            // list.printList();
             // tree.PreOrder();
             // tree.PostOrder();
             // tree.DeleteNode(50);
