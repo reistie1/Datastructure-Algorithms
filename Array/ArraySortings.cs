@@ -19,5 +19,30 @@ namespace DatastructureAlgorithms.ArraySorting
 
             return unsortedArray;
         }
+
+        public static int[] SelectionSort(int[] unsortedArray)
+        {
+            for(var i = 0; i <= unsortedArray.Length - 1; i++)
+            {
+                var min = i;
+                for(var j = i + 1; j < unsortedArray.Length; j++)
+                {
+                    if(unsortedArray[j] < unsortedArray[min])
+                    {
+                        min = j;
+                    }
+                }
+
+                if (min != i)
+                {
+                    var temp = unsortedArray[min];
+                    unsortedArray[min] = unsortedArray[i];
+                    unsortedArray[i] = temp;
+                }
+            }
+
+            return unsortedArray;
+        }
     }
+
 }

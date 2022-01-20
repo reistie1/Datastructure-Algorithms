@@ -15,6 +15,7 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
+            //Console.WriteLine(ArraySortings.SelectionSort(new int[] {3,54,89,46,11,70,32,2})[7]);
             // list.printList();
             // tree.PreOrder();
             // tree.PostOrder();
