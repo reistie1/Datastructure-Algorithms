@@ -22,45 +22,81 @@ namespace DatastructureAlgorithms.AVLTree
         }
 
         int GetBalance(AVLTreeNode node) {
-            return (node == null) ? 0 : Height(node.right) - Height(node.left);
+            return (node == null) ? 0 : Height(node.left) - Height(node.right);
         }
 
-        public AVLTreeNode RotateRight(AVLTreeNode node)
+        public AVLTreeNode RotateRight(AVLTreeNode y)
         {
-            AVLTreeNode left = node.left;
-            AVLTreeNode right = node.right;
+            AVLTreeNode x = y.left;
+            AVLTreeNode z = x.right;
 
-            left.right = node;
-            node.left = right;
+            x.right = y;
+            y.left = z;
 
-            UpdateHeight(node);
-            UpdateHeight(left);
+            UpdateHeight(y);
+            UpdateHeight(x);
 
-            return left;
+            return x;
         }
 
-        public AVLTreeNode RotateLeft(AVLTreeNode node)
+        public AVLTreeNode RotateLeft(AVLTreeNode y)
         {
-            AVLTreeNode left = node.left;
-            AVLTreeNode right = node.right;
+            AVLTreeNode x = y.right;
+            AVLTreeNode z = x.left;
 
-            right.left = node;
-            node.right = left;
+            x.left = y;
+            y.right = z;
 
-            UpdateHeight(node);
-            UpdateHeight(right);
+            UpdateHeight(y);
+            UpdateHeight(x);
 
-            return left;
+            return x;
         }
 
-        public AVLTreeNode Rebalance(AVLTreeNode node) 
-        {
-            throw new NotImplementedException();
+        public AVLTreeNode mostLeftChild(AVLTreeNode node) {
+            AVLTreeNode current = node;
+
+            while (current.left != null) {
+                current = current.left;
+            }
+            return current;
         }
 
-        public AVLTreeNode insert(int key)
+        public AVLTreeNode Rebalance(AVLTreeNode z) 
         {
-            return Insert(this.root, key);
+            UpdateHeight(z);
+            int balance = GetBalance(z);
+
+            if(balance < -1)
+            {
+                if(Height(z.right.right) > Height(z.right.left))
+                {
+                    z = RotateLeft(z);
+                }
+                else {
+                    z.right = RotateRight(z.right);
+                    z = RotateLeft(z);
+                }
+            }
+            else if (balance > 1) 
+            {
+                if (Height(z.left.left) > Height(z.left.right))
+                {   
+                    z = RotateRight(z);
+                }
+                else 
+                {
+                    z.left = RotateLeft(z.left);
+                    z = RotateRight(z);
+                }
+            }
+
+            return z;
+        }
+
+        public void insert(int key)
+        {
+            root = Insert(this.root, key);
         }
 
         public AVLTreeNode Insert(AVLTreeNode node, int key) 
@@ -69,11 +105,11 @@ namespace DatastructureAlgorithms.AVLTree
             {
                 return new AVLTreeNode(key);
             } 
-            else if (node.data > key) 
+            else if (key < node.data) 
             {
                 node.left = Insert(node.left, key);
             } 
-            else if (node.data < key) 
+            else if (key > node.data) 
             {
                 node.right = Insert(node.right, key);
             } 
@@ -81,8 +117,8 @@ namespace DatastructureAlgorithms.AVLTree
             {
                 throw new Exception("duplicate Key!");
             }
-            return node;
-            //return Rebalance(node);
+            Console.WriteLine(node.data);
+            return Rebalance(node);
         }
 
         public void InOrder()
@@ -98,6 +134,30 @@ namespace DatastructureAlgorithms.AVLTree
                 Console.WriteLine(node.data + " ");
                 InOrderTraversal(node.right);
             }            
+        }
+
+        public AVLTreeNode delete(AVLTreeNode node, int key)
+        {
+            if (node == null) {
+                return node;
+            } else if (node.data > key) {
+                node.left = delete(node.left, key);
+            } else if (node.data < key) {
+                node.right = delete(node.right, key);
+            } else {
+                if (node.left == null || node.right == null) {
+                    node = (node.left == null) ? node.right : node.left;
+                } else {
+                    AVLTreeNode mostLeftChild = this.mostLeftChild(node.right);
+                    node.data = mostLeftChild.data;
+                    node.right = delete(node.right, node.data);
+                }
+            }
+            if (node != null) {
+                node = Rebalance(node);
+            }
+
+            return node;
         }
 
 
