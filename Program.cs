@@ -8,6 +8,7 @@ using DatastructureAlgorithms.DataTypes;
 using DatastructureAlgorithms.AVLTree;
 using DatastructureAlgorithms.AVLTreeNodes;
 using DatastructureAlgorithms.ArraySorting;
+using DatastructureAlgorithms.ArraySearch;
 
 namespace DatastructureAlgorithms
 {
@@ -15,14 +16,9 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            AVLTrees tree = new AVLTrees();
-            tree.insert(20);
-            tree.insert(43);
-            tree.insert(55);
-            tree.insert(50);
-            tree.insert(40);
+           Console.WriteLine(ArraySearchs.LinearSearch(new int[]{54,32,12,86,96,43,11,9}, 109)); 
             //tree.InOrder();
-            //Console.WriteLine(ArraySortings.SelectionSort(new int[] {3,54,89,46,11,70,32,2})[7]);
+            
             // list.printList();
             // tree.PreOrder();
             // tree.PostOrder();

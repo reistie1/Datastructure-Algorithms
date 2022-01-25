@@ -66,19 +66,8 @@ namespace DatastructureAlgorithms.AVLTree
         {
             UpdateHeight(z);
             int balance = GetBalance(z);
-
-            if(balance < -1)
-            {
-                if(Height(z.right.right) > Height(z.right.left))
-                {
-                    z = RotateLeft(z);
-                }
-                else {
-                    z.right = RotateRight(z.right);
-                    z = RotateLeft(z);
-                }
-            }
-            else if (balance > 1) 
+    
+            if (balance > 1) 
             {
                 if (Height(z.left.left) > Height(z.left.right))
                 {   
@@ -88,6 +77,17 @@ namespace DatastructureAlgorithms.AVLTree
                 {
                     z.left = RotateLeft(z.left);
                     z = RotateRight(z);
+                }
+            }
+            else if(balance < -1)
+            {
+                if(Height(z.right.right) > Height(z.right.left))
+                {
+                    z = RotateLeft(z);
+                }
+                else {
+                    z.right = RotateRight(z.right);
+                    z = RotateLeft(z);
                 }
             }
 
