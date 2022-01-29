@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using DatastructureAlgorithms.Linked_Lists;
+using DatastructureAlgorithms.Linked_List;
 using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.Stack

@@ -1,5 +1,5 @@
 ﻿using System;
-using DatastructureAlgorithms.Linked_Lists;
+using DatastructureAlgorithms.Linked_List;
 using DatastructureAlgorithms.Stack;
 using DatastructureAlgorithms.Queue;
 using DatastructureAlgorithms.BinaryTree;
@@ -14,6 +14,7 @@ using DatastructureAlgorithms.Graphs;
 using DatastructureAlgorithms.GraphNodes;
 using DatastructureAlgorithms.GraphEdges;
 using System.Linq;
+using DatastructureAlgorithms.HashTables;
 
 namespace DatastructureAlgorithms
 {
@@ -21,45 +22,43 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            Graph graph = new Graph();
-            graph.AddNode(new GraphNode("Adam"));
-            graph.AddNode(new GraphNode("Josh"));
-            graph.AddEdge(new GraphEdge(graph._nodeSet.First().Value, graph._nodeSet.Last().Value, 19));
-            Console.WriteLine(graph.ToString()); 
+            // HashTable hash = new HashTable();
+            // hash.Insert("sample", "James");
+            // hash.ToString();
             
             // list.printList();
             // tree.PreOrder();
             // tree.PostOrder();
             // tree.DeleteNode(50);
             // tree.InOrder();
-            // string input = "";
+            string input = "";
 
-            //     Console.WriteLine("Menu Options");
-            //     Console.WriteLine("-----------------");
-            //     Console.WriteLine("Linked List - ll\nBinary Search Tree - bst\nQueue - queue\nStack - stack \n");
-            //     Console.WriteLine("Please select an options");
+                Console.WriteLine("Menu Options");
+                Console.WriteLine("-----------------");
+                Console.WriteLine("Linked List - ll\nBinary Search Tree - bst\nQueue - queue\nStack - stack \n");
+                Console.WriteLine("Please select an options");
 
-            // do{
-            //     input = Console.ReadLine();
+            do{
+                input = Console.ReadLine();
 
-            //     switch(input)
-            //     {
-            //         case "ll":
-            //             Console.WriteLine("You have chosen to use a linked list\n");
-            //             break;
-            //         case "bst":
-            //             Console.WriteLine("You have chosen a binary search tree\n");
-            //             break;
-            //         case "queue":
-            //             Console.WriteLine("You have chosen a queue\n");
-            //             break;
-            //         case "stack":
-            //             Console.WriteLine("You have chosen a stack\n");
-            //             break;
-            //         default:
-            //             break;
-            //     }
-            // }while(input != "quit");
+                switch(input)
+                {
+                    case "ll":
+                        Console.WriteLine("You have chosen to use a linked list\n");
+                        break;
+                    case "bst":
+                        Console.WriteLine("You have chosen a binary search tree\n");
+                        break;
+                    case "queue":
+                        Console.WriteLine("You have chosen a queue\n");
+                        break;
+                    case "stack":
+                        Console.WriteLine("You have chosen a stack\n");
+                        break;
+                    default:
+                        break;
+                }
+            }while(input != "quit");
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Datastructures_LinkedList;
 using System;
 
-namespace DatastructureAlgorithms.Linked_Lists
+namespace DatastructureAlgorithms.Linked_List
 {
     public class LinkedLists<T> where T : class
     {
