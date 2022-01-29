@@ -9,6 +9,11 @@ using DatastructureAlgorithms.AVLTree;
 using DatastructureAlgorithms.AVLTreeNodes;
 using DatastructureAlgorithms.ArraySorting;
 using DatastructureAlgorithms.ArraySearch;
+using DatastructureAlgorithms.MaxHeap;
+using DatastructureAlgorithms.Graphs;
+using DatastructureAlgorithms.GraphNodes;
+using DatastructureAlgorithms.GraphEdges;
+using System.Linq;
 
 namespace DatastructureAlgorithms
 {
@@ -16,8 +21,11 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-           Console.WriteLine(ArraySearchs.LinearSearch(new int[]{54,32,12,86,96,43,11,9}, 109)); 
-            //tree.InOrder();
+            Graph graph = new Graph();
+            graph.AddNode(new GraphNode("Adam"));
+            graph.AddNode(new GraphNode("Josh"));
+            graph.AddEdge(new GraphEdge(graph._nodeSet.First().Value, graph._nodeSet.Last().Value, 19));
+            Console.WriteLine(graph.ToString()); 
             
             // list.printList();
             // tree.PreOrder();
