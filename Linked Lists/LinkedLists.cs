@@ -114,8 +114,16 @@ namespace DatastructureAlgorithms.Linked_List
 
             if(curr.value == value)
             {
-                this.head = this.head.next;
-                curr.next = null;
+                if(this.head.next == null)
+                {
+                    this.head = null;
+                }
+                else
+                {
+                    this.head = this.head.next;
+                    curr.next = null;
+                }
+                return this.head;
             }
 
             do
@@ -132,9 +140,19 @@ namespace DatastructureAlgorithms.Linked_List
 
         public ListNode<T> RemoveFromStart()
         {
-            ListNode<T> temp = this.head.next;
+            if(this.head == null || this.head.next == null)
+            {
+                var temp = this.head;
+                this.head = null;
+                this.size = 0;
+    
+                return temp;
+            }
+
+            ListNode<T> other = this.head.next;
             this.head.next = null;
-            this.head = temp;
+            this.head = other;
+            this.size--;
 
             return this.head;
         }

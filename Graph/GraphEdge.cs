@@ -27,5 +27,18 @@ namespace DatastructureAlgorithms.GraphEdges
         {
             _weight = newWeight;
         }
+
+        public GraphNode GetSource()
+        {
+           return _source;
+        }
+        public GraphNode GetDestination()
+        {
+            return _destination;
+        }
+        public int GetWeight()
+        {
+           return _weight;
+        }
     }
 }

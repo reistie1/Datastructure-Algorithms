@@ -6,33 +6,54 @@ namespace DatastructureAlgorithms.HashTables
 {
     public class HashTable
     {
-        private Dictionary<string, LinkedLists<string>> _hashtable; 
+        private Dictionary<double, LinkedLists<string>> _hashtable; 
         public HashTable()
         {
-            _hashtable = new Dictionary<string, LinkedLists<string>>();
+            _hashtable = new Dictionary<double, LinkedLists<string>>();
         }
 
-        public void Insert(string key, string value)
+        public void Insert(int key, string value)
         {
-            var hashKey = this.Hash(value).ToString();
-            _hashtable.Add(hashKey, new LinkedLists<string>());
+            double hashKey = this.Hash(key);
+            Console.WriteLine(hashKey);
+
+            if(_hashtable.ContainsKey(hashKey))
+            {
+                _hashtable[hashKey].AddToEnd(value);
+            }
+            else
+            {
+                _hashtable[hashKey] = new LinkedLists<string>();
+                _hashtable[hashKey].AddToStart(value);
+            } 
         }
 
-        private int Hash(string key)
+        public void Delete(int key, string value)
         {
-            return (key.Length % 509);
+            double hashKey = this.Hash(key);
+            _hashtable[hashKey].Delete(value);
+
+        }
+
+        private double Hash(int key)
+        {
+            int length = key.ToString().Length;
+
+            return length * (key * 25 % 509);
         }
 
         public override string ToString()
         {
-            
             string result = "";
 
             foreach(var item in _hashtable)
             {
-                Console.WriteLine(item.Key);
-            }
+                if(item.Value.head != null)
+                {
+                    item.Value.printList();
 
+                }
+            }
             return result; 
         }
     }
