@@ -6,13 +6,13 @@ namespace DatastructureAlgorithms.HashTables
 {
     public class HashTable
     {
-        private Dictionary<double, LinkedLists<string>> _hashtable; 
+        private Dictionary<double, LinkedLists> _hashtable; 
         public HashTable()
         {
-            _hashtable = new Dictionary<double, LinkedLists<string>>();
+            _hashtable = new Dictionary<double, LinkedLists>();
         }
 
-        public void Insert(int key, string value)
+        public void Insert(int key, int value)
         {
             double hashKey = this.Hash(key);
             Console.WriteLine(hashKey);
@@ -23,12 +23,12 @@ namespace DatastructureAlgorithms.HashTables
             }
             else
             {
-                _hashtable[hashKey] = new LinkedLists<string>();
+                _hashtable[hashKey] = new LinkedLists();
                 _hashtable[hashKey].AddToStart(value);
             } 
         }
 
-        public void Delete(int key, string value)
+        public void Delete(int key, int value)
         {
             double hashKey = this.Hash(key);
             _hashtable[hashKey].Delete(value);

@@ -4,10 +4,10 @@ using System;
 
 namespace DatastructureAlgorithms.Linked_List
 {
-    public class LinkedLists<T> where T : class
+    public class LinkedLists
     {
-        public ListNode<T> head;
-        public ListNode<T> tail;
+        public ListNode head;
+        public ListNode tail;
         public int size;
         public LinkedLists()
         {
@@ -16,7 +16,7 @@ namespace DatastructureAlgorithms.Linked_List
             this.size = 0;
         }
 
-        public ListNode<T> CreateList(T[] input_list)
+        public ListNode CreateList(int[] input_list)
         {
             int index = 0;
 
@@ -29,13 +29,13 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
-        public T Search(T value)
+        public int Search(int value)
         {
-            ListNode<T> current = this.head;
+            ListNode current = this.head;
 
             if(this.head == null)
             {
-                return null;
+                return -1;
             }
 
             do
@@ -46,15 +46,15 @@ namespace DatastructureAlgorithms.Linked_List
             
             if(current == null)
             {
-                return null;
+                return -1;
             }
 
             return current.value;
         }
 
-        public ListNode<T> AddToStart(T value)
+        public ListNode AddToStart(int value)
         {
-            ListNode<T> newNode = new ListNode<T>(value);
+            ListNode newNode = new ListNode(value);
 
             if(this.head == null)
             {
@@ -72,10 +72,30 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
-        public ListNode<T> AddToEnd(T value)
+        public ListNode AddToStart(string value)
         {
-            ListNode<T> newNode = new ListNode<T>(value);
-            ListNode<T> current = this.head;
+            ListNode newNode = new ListNode(value);
+
+            if(this.head == null)
+            {
+                this.head = newNode;
+                this.tail = this.head;
+            }
+            else
+            {
+                newNode.next = this.head;
+                this.head = newNode;
+            }
+
+            this.size++;
+            
+            return this.head;
+        }
+
+        public ListNode AddToEnd(int value)
+        {
+            ListNode newNode = new ListNode(value);
+            ListNode current = this.head;
 
             if(current == null)
             {
@@ -86,7 +106,26 @@ namespace DatastructureAlgorithms.Linked_List
                 return this.head;
             }
 
+            this.tail.next = newNode;
+            this.tail = newNode;
+            this.size++;
 
+            return this.tail;
+        }
+
+         public ListNode AddToEnd(string value)
+        {
+            ListNode newNode = new ListNode(value);
+            ListNode current = this.head;
+
+            if(current == null)
+            {
+                this.head = newNode;
+                this.tail = this.head;
+                this.size++;
+
+                return this.head;
+            }
             this.tail.next = newNode;
             this.tail = newNode;
             this.size++;
@@ -96,21 +135,21 @@ namespace DatastructureAlgorithms.Linked_List
 
         public void printList()
         {
-            ListNode<T> temp = this.head;
+            ListNode temp = this.head;
             string result = "";
             do
             {
-                result += $"{temp.value.ToString()} ->"; 
+                result += $"{temp.otherValue} ->"; 
                 temp = temp.next;
             }while(temp != null);
 
             Console.WriteLine(result); 
         }
 
-        public ListNode<T> Delete(T value)
+        public ListNode Delete(int value)
         {
-            ListNode<T> prev = null;
-            ListNode<T> curr = this.head;
+            ListNode prev = null;
+            ListNode curr = this.head;
 
             if(curr.value == value)
             {
@@ -138,22 +177,26 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
-        public ListNode<T> RemoveFromStart()
+        public ListNode RemoveFromStart()
         {
-            if(this.head == null || this.head.next == null)
+            
+            if(this.head.next != null)
             {
                 var temp = this.head;
-                this.head = null;
-                this.size = 0;
-    
-                return temp;
+                
+                this.head = this.head.next;
+                temp.next = null;
+                this.size--;
+
+                return this.head;
             }
 
-            ListNode<T> other = this.head.next;
-            this.head.next = null;
-            this.head = other;
-            this.size--;
+            this.size = 0;
+            return this.head;
+        }
 
+        public ListNode Peek()
+        {
             return this.head;
         }
     }

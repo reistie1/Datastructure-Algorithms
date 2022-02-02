@@ -36,7 +36,7 @@ namespace DatastructureAlgorithms
             graph.AddEdge(new GraphEdge(b, d, 0));
             graph.AddEdge(new GraphEdge(c, d, 0));
 
-            graph.BreadthFirstSearch();
+            graph.DepthFirstSearch();
 
 
             // list.printList();

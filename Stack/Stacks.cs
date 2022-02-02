@@ -4,20 +4,20 @@ using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.Stack
 {
-    public class Stacks<T> where T : class
+    public class Stacks
     {
-        public LinkedLists<T> stack;
+        public LinkedLists stack;
         public Stacks()
         {
-            stack = new LinkedLists<T>();
+            stack = new LinkedLists();
         }
 
-        public ListNode<T> Push(T value)
+        public ListNode Push(int value)
         {
             return stack.AddToStart(value);
         }
 
-        public ListNode<T> Peek()
+        public ListNode Peek()
         {
             return stack.head;
         }
