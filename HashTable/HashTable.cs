@@ -4,34 +4,34 @@ using DatastructureAlgorithms.Linked_List;
 
 namespace DatastructureAlgorithms.HashTables
 {
-    public class HashTable
+    public class HashTable<T> where T : class
     {
-        private Dictionary<double, LinkedLists> _hashtable; 
+        private Dictionary<double, LinkedLists<T>> _hashtable; 
         public HashTable()
         {
-            _hashtable = new Dictionary<double, LinkedLists>();
+            _hashtable = new Dictionary<double, LinkedLists<T>>();
         }
 
-        public void Insert(int key, int value)
+        public void Insert(int key, T value)
         {
             double hashKey = this.Hash(key);
             Console.WriteLine(hashKey);
 
             if(_hashtable.ContainsKey(hashKey))
             {
-                _hashtable[hashKey].AddToEnd(value);
+                _hashtable[hashKey].InsertAtEnd(value);
             }
             else
             {
-                _hashtable[hashKey] = new LinkedLists();
-                _hashtable[hashKey].AddToStart(value);
+                _hashtable[hashKey] = new LinkedLists<T>();
+                _hashtable[hashKey].InsertAtStart(value);
             } 
         }
 
-        public void Delete(int key, int value)
+        public void Delete(int key, T value)
         {
             double hashKey = this.Hash(key);
-            _hashtable[hashKey].Delete(value);
+            _hashtable[hashKey].DeleteNode(value);
 
         }
 

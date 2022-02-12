@@ -3,20 +3,20 @@ using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.Queue
 {
-    public class Queues
+    public class Queues<T> where T : class
     {
-        public LinkedLists queue;
+        public LinkedLists<T> queue;
         public Queues()
         {
-            queue = new LinkedLists();
+            queue = new LinkedLists<T>();
         }
 
-        public ListNode Enqueue(int value)
+        public ListNode<T> Enqueue(T value)
         {
-            return queue.AddToEnd(value);
+            return queue.InsertAtEnd(value);
         }
 
-        public ListNode Peek()
+        public ListNode<T> Peek()
         {
             return queue.head;
         }
@@ -34,6 +34,11 @@ namespace DatastructureAlgorithms.Queue
         public void ToList()
         {
             queue.printList();
+        }
+
+        public bool isEmpty()
+        {
+            return queue.size == 0;
         }
     }
 }

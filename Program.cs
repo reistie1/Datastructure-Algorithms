@@ -15,6 +15,7 @@ using DatastructureAlgorithms.GraphNodes;
 using DatastructureAlgorithms.GraphEdges;
 using System.Linq;
 using DatastructureAlgorithms.HashTables;
+using System.Collections.Generic;
 
 namespace DatastructureAlgorithms
 {
@@ -29,14 +30,14 @@ namespace DatastructureAlgorithms
             var d = graph.AddNode(new GraphNode("D"));
             var b = graph.AddNode(new GraphNode("B"));
 
-            graph.AddEdge(new GraphEdge(s, a, 0));
-            graph.AddEdge(new GraphEdge(s, b, 0));
-            graph.AddEdge(new GraphEdge(s, c, 0));
-            graph.AddEdge(new GraphEdge(a, d, 0));
-            graph.AddEdge(new GraphEdge(b, d, 0));
-            graph.AddEdge(new GraphEdge(c, d, 0));
+            graph.AddEdge(s, a);
+            graph.AddEdge(s, b);
+            graph.AddEdge(s, c);
+            graph.AddEdge(d, a);
+            graph.AddEdge(d, b);
+            graph.AddEdge(d, c);
 
-            graph.DepthFirstSearch();
+            graph.BreadthFirstSearch();
 
 
             // list.printList();

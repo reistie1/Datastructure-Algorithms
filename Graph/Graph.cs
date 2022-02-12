@@ -5,6 +5,7 @@ using System;
 using DatastructureAlgorithms.Linked_List;
 using System.Collections.Generic;
 using Datastructures_LinkedList;
+using DatastructureAlgorithms.Queue;
 
 namespace DatastructureAlgorithms.Graphs
 {
@@ -20,72 +21,90 @@ namespace DatastructureAlgorithms.Graphs
 
         public GraphNode AddNode(GraphNode newNode)
         {
-            _nodeSet.Add(newNode._identifier, newNode);
+            _nodeSet.Add(newNode.GetIdentifier(), newNode);
 
             return newNode;
         }
-        public void AddEdge(GraphEdge newEdge)
+        public void AddEdge(GraphNode sourceNode, GraphNode destinationNode)
         {
-            _edgeList.Add(newEdge);
+            _nodeSet[destinationNode.GetIdentifier()].AddConnection(sourceNode);
+            _nodeSet[sourceNode.GetIdentifier()].AddConnection(destinationNode);
         }
 
         public void DepthFirstSearch()
         {
-            LinkedLists stack = new LinkedLists();
-            GraphNode firstNode = _nodeSet.FirstOrDefault().Value;
+            LinkedLists<string> stack = new LinkedLists<string>();
+            var currentNode = _nodeSet.FirstOrDefault().Value;
 
-            stack.AddToStart(firstNode._identifier);
-            var j = 5;
+            stack.InsertAtStart(currentNode._identifier);
+            currentNode.SetVisited(true); 
 
-            while(j-- > 0)
+            do
             {
-                var node = stack.RemoveFromStart();
-                var visitedNode = _nodeSet.Where(n => n.Value._identifier == node.otherValue).FirstOrDefault().Value;
-
-                visitedNode.UpdateVisited(true);
-                var nodeEdgeList = _edgeList.Where(l => l.GetSource()._identifier == node.otherValue).ToArray();
-
-                for(var i = 0; i < nodeEdgeList.Length; i++)
+                stack.printList();
+                if(!currentNode.connections.Any(c => c.getVisitStatus() == false))
                 {
-                    Console.WriteLine($"Destination: {nodeEdgeList[i].GetDestination()._identifier}, Visited: {nodeEdgeList[i].GetDestination()._isVisited}");
-                    stack.AddToStart(nodeEdgeList[i].GetDestination()._identifier);
+                    stack.RemoveFromStart();
+                    currentNode = _nodeSet[stack.Peek().value]; 
                 }
+                else
+                {
+                    currentNode = currentNode.connections.Where(c => c._isVisited == false)?.FirstOrDefault().GetCurrentNode();
 
-            }
-
-        }
+                    currentNode.SetVisited(true);
+                    stack.InsertAtStart(currentNode._identifier);
+                }
+            }while(stack.GetSize() > 0);
+        } 
 
         public void BreadthFirstSearch()
         {
-            LinkedLists queue = new LinkedLists();
+            Queues<string> queue = new Queues<string>();
             GraphNode firstNode = _nodeSet.FirstOrDefault().Value;
 
             //add firstnode to end of queue and mark node as visited
-            queue.AddToEnd(firstNode._identifier);
-            firstNode._isVisited = true;
+            queue.Enqueue("start");
+            firstNode.SetVisited(true);
 
-            while(queue.size != 0)
+            while(!queue.isEmpty())
             {
-                ListNode node = queue.RemoveFromStart();
-                Console.WriteLine($"node value: {node.otherValue}");
-                var nodeEdgeList = _edgeList.Where(l => l.GetSource()._identifier == node.otherValue).ToArray();
-                
+                queue.ToList();
 
-                for(var i = 0; i < nodeEdgeList.Length; i++)
+                if(!firstNode.connections.Any(c => c.getVisitStatus() == false))
                 {
-                    Console.WriteLine($"Destination: {nodeEdgeList[i].GetDestination()._identifier}, Visited: {nodeEdgeList[i].GetDestination()._isVisited}");
-                    if(this.FindAdjacentNode(nodeEdgeList, i))
+                    queue.Dequeue();
+                    firstNode = _nodeSet[queue.Peek().value];
+                }
+                else
+                {
+                    var nodeList = firstNode.connections.Where(c => c._isVisited == false).ToList();
+
+                    if(nodeList.Count > 0)
                     {
-                        nodeEdgeList[i].GetDestination().UpdateVisited(true);
-                        queue.AddToEnd(nodeEdgeList[i].GetDestination()._identifier);
+                        var i = nodeList.Count - 1;
+
+                        do
+                        {
+                            firstNode = _nodeSet[nodeList[i].GetIdentifier()];
+                            nodeList[i].SetVisited(true);
+                            queue.Enqueue(nodeList[i].GetIdentifier());
+                        }while(i-- > 0);
                     }
+
+                    queue.Dequeue();
+                    firstNode = _nodeSet[queue.Peek().value];
+                    // else
+                    // {
+                    //     queue.Dequeue();
+                    //     firstNode = _nodeSet[queue.Peek().value];
+                    // }
                 }
             }
         }
 
         private bool FindAdjacentNode(GraphEdge[] nodeEdgeList, int index)
         {
-            if(!nodeEdgeList[index].GetDestination()._isVisited)
+            if(!nodeEdgeList[index].GetDestination().getVisitStatus())
             {
                 return true;
             }

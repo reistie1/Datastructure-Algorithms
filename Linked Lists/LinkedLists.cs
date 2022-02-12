@@ -4,38 +4,38 @@ using System;
 
 namespace DatastructureAlgorithms.Linked_List
 {
-    public class LinkedLists
+    public class LinkedLists<T> where T : class
     {
-        public ListNode head;
-        public ListNode tail;
+        public ListNode<T> head;
+        public ListNode<T> tail;
         public int size;
         public LinkedLists()
         {
             this.head = null;
-            this.tail = this.head;
+            this.tail = null;
             this.size = 0;
         }
 
-        public ListNode CreateList(int[] input_list)
+        public ListNode<T> CreateList(T[] input_list)
         {
             int index = 0;
 
             do
             {
-                this.AddToEnd(input_list[index++]);
+                this.InsertAtEnd(input_list[index++]);
                 this.size++;
             }while(index <= input_list.Length - 1);
 
             return this.head;
         }
 
-        public int Search(int value)
+        public T Search(T value)
         {
-            ListNode current = this.head;
+            ListNode<T> current = this.head;
 
             if(this.head == null)
             {
-                return -1;
+                return null;
             }
 
             do
@@ -46,15 +46,15 @@ namespace DatastructureAlgorithms.Linked_List
             
             if(current == null)
             {
-                return -1;
+                return null;
             }
 
             return current.value;
         }
 
-        public ListNode AddToStart(int value)
+        public ListNode<T> InsertAtStart(T value)
         {
-            ListNode newNode = new ListNode(value);
+            ListNode<T> newNode = new ListNode<T>(value);
 
             if(this.head == null)
             {
@@ -72,30 +72,10 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
-        public ListNode AddToStart(string value)
+        public ListNode<T> InsertAtEnd(T value)
         {
-            ListNode newNode = new ListNode(value);
-
-            if(this.head == null)
-            {
-                this.head = newNode;
-                this.tail = this.head;
-            }
-            else
-            {
-                newNode.next = this.head;
-                this.head = newNode;
-            }
-
-            this.size++;
-            
-            return this.head;
-        }
-
-        public ListNode AddToEnd(int value)
-        {
-            ListNode newNode = new ListNode(value);
-            ListNode current = this.head;
+            ListNode<T> newNode = new ListNode<T>(value);
+            ListNode<T> current = this.head;
 
             if(current == null)
             {
@@ -113,43 +93,29 @@ namespace DatastructureAlgorithms.Linked_List
             return this.tail;
         }
 
-         public ListNode AddToEnd(string value)
-        {
-            ListNode newNode = new ListNode(value);
-            ListNode current = this.head;
-
-            if(current == null)
-            {
-                this.head = newNode;
-                this.tail = this.head;
-                this.size++;
-
-                return this.head;
-            }
-            this.tail.next = newNode;
-            this.tail = newNode;
-            this.size++;
-
-            return this.head;
-        }
-
         public void printList()
         {
-            ListNode temp = this.head;
+            ListNode<T> temp = this.head;
             string result = "";
+
+            if(temp == null)
+            {
+                return;
+            }
+            
             do
             {
-                result += $"{temp.otherValue} ->"; 
+                result += $"{temp.value} ->"; 
                 temp = temp.next;
             }while(temp != null);
 
             Console.WriteLine(result); 
         }
 
-        public ListNode Delete(int value)
+        public ListNode<T> DeleteNode(T value)
         {
-            ListNode prev = null;
-            ListNode curr = this.head;
+            ListNode<T> prev = null;
+            ListNode<T> curr = this.head;
 
             if(curr.value == value)
             {
@@ -177,7 +143,7 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
-        public ListNode RemoveFromStart()
+        public ListNode<T> RemoveFromStart()
         {
             
             if(this.head.next != null)
@@ -195,9 +161,37 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
-        public ListNode Peek()
+        public ListNode<T> RemoveFromEnd()
+        {
+            
+            ListNode<T> current = this.head;
+            ListNode<T> prev = null;
+
+            if(current == null)
+            {
+                return current;
+            }
+
+            do
+            {
+                prev = current;
+                current = current.next;
+            }while(current.next != null);
+
+            prev.next = null;
+            this.size--;
+
+            return current;
+        }
+
+        public ListNode<T> Peek()
         {
             return this.head;
+        }
+
+        public int GetSize()
+        {
+            return this.size;
         }
     }
 }

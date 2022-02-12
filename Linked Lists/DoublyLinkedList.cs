@@ -5,21 +5,21 @@ namespace DatastructureAlgorithms.DoublyLinkedList
 {
     public class DoublyLinkedLists<T> where T : class
     {
-        public ListNode head;
+        public ListNode<T> head;
         public DoublyLinkedLists()
         {
             head = null;
         }
 
-        public ListNode  InsertAtStart(int value)
+        public ListNode<T>  InsertAtStart(T value)
         {
             if(this.head == null)
             {
-                this.head = new ListNode(value);
+                this.head = new ListNode<T>(value);
             }
             else
             {
-                ListNode newNode = new ListNode(value);
+                ListNode<T> newNode = new ListNode<T>(value);
                 newNode.next = this.head;
                 this.head.prev = newNode;
                 this.head = newNode;
@@ -28,13 +28,13 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;
         }
 
-        public int Search(int value)
+        public T Search(T value)
         {
-            ListNode current = this.head;
+            ListNode<T> current = this.head;
 
             if(this.head == null)
             {
-                return -1;
+                return null;
             }
 
             do
@@ -45,15 +45,15 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             
             if(current == null)
             {
-                return -1;
+                return null;
             }
 
             return current.value;
         }
 
-        public ListNode  DeleteStart()
+        public ListNode<T>  DeleteStart()
         {
-            ListNode  temp = this.head;
+            ListNode<T> temp = this.head;
 
             this.head = this.head.next;
             this.head.prev = null;
@@ -62,10 +62,10 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;            
         }
 
-        public ListNode InsertAtEnd(int value)
+        public ListNode<T> InsertAtEnd(T value)
         {
-            ListNode current = this.head;
-            ListNode newNode = new ListNode(value);
+            ListNode<T> current = this.head;
+            ListNode<T> newNode = new ListNode<T>(value);
             
             while(current.next != null)
             {
@@ -78,10 +78,10 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;
         }
 
-        public ListNode DeleteLast()
+        public ListNode<T> DeleteLast()
         {
-            ListNode prev = null;
-            ListNode curr = this.head;
+            ListNode<T> prev = null;
+            ListNode<T> curr = this.head;
 
             do
             {
@@ -95,11 +95,11 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;
         }
 
-        public ListNode InsertAfter(int value, int newvalue)
+        public ListNode<T> InsertAfter(T value, T newvalue)
         {
-            ListNode prev = null;
-            ListNode curr = this.head;
-            ListNode newNode = new ListNode(newvalue);
+            ListNode<T> prev = null;
+            ListNode<T> curr = this.head;
+            ListNode<T> newNode = new ListNode<T>(newvalue);
 
             do
             {
@@ -116,10 +116,10 @@ namespace DatastructureAlgorithms.DoublyLinkedList
         
         }
 
-        public ListNode Delete(int value)
+        public ListNode<T> Delete(T value)
         {
-            ListNode prev = null;
-            ListNode curr = this.head;
+            ListNode<T> prev = null;
+            ListNode<T> curr = this.head;
 
             if(this.head.value == value)
             {
@@ -154,7 +154,7 @@ namespace DatastructureAlgorithms.DoublyLinkedList
 
         public void PrintForward()
         {
-            ListNode temp = this.head;
+            ListNode<T> temp = this.head;
             string result = "";
 
             while(temp != null)
@@ -167,7 +167,7 @@ namespace DatastructureAlgorithms.DoublyLinkedList
 
         public void PrintInReverse()
         {
-            ListNode temp = this.head;
+            ListNode<T> temp = this.head;
             string result = "";
 
             while(temp.next != null)
