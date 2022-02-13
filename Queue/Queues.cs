@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DatastructureAlgorithms.Linked_List;
 using Datastructures_LinkedList;
 
@@ -9,6 +10,14 @@ namespace DatastructureAlgorithms.Queue
         public Queues()
         {
             queue = new LinkedLists<T>();
+        }
+
+        public Queues(List<T> list)
+        {
+            foreach(var item in list)
+            {
+                queue.InsertAtEnd(item);
+            }
         }
 
         public ListNode<T> Enqueue(T value)

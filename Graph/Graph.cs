@@ -1,31 +1,29 @@
 using System.Linq;
 using DatastructureAlgorithms.GraphEdges;
 using DatastructureAlgorithms.GraphNodes;
-using System;
-using DatastructureAlgorithms.Linked_List;
 using System.Collections.Generic;
-using Datastructures_LinkedList;
 using DatastructureAlgorithms.Queue;
+using DatastructureAlgorithms.Stack;
 
 namespace DatastructureAlgorithms.Graphs
 {
-    public class Graph
+    public class Graph<T> where T : class
     {
-        public List<GraphEdge> _edgeList;
-        public Dictionary<string,GraphNode> _nodeSet;
+        public List<GraphEdge<T>> _edgeList;
+        public Dictionary<T,GraphNode<T>> _nodeSet;
         public Graph()
         {
-            _edgeList = new List<GraphEdge>();
-            _nodeSet = new Dictionary<string,GraphNode>();
+            _edgeList = new List<GraphEdge<T>>();
+            _nodeSet = new Dictionary<T,GraphNode<T>>();
         }
 
-        public GraphNode AddNode(GraphNode newNode)
+        public GraphNode<T> AddNode(GraphNode<T> newNode)
         {
             _nodeSet.Add(newNode.GetIdentifier(), newNode);
 
             return newNode;
         }
-        public void AddEdge(GraphNode sourceNode, GraphNode destinationNode)
+        public void AddEdge(GraphNode<T> sourceNode, GraphNode<T> destinationNode)
         {
             _nodeSet[destinationNode.GetIdentifier()].AddConnection(sourceNode);
             _nodeSet[sourceNode.GetIdentifier()].AddConnection(destinationNode);
@@ -33,18 +31,18 @@ namespace DatastructureAlgorithms.Graphs
 
         public void DepthFirstSearch()
         {
-            LinkedLists<string> stack = new LinkedLists<string>();
+            Stacks<T> stack = new Stacks<T>();
             var currentNode = _nodeSet.FirstOrDefault().Value;
 
-            stack.InsertAtStart(currentNode._identifier);
+            stack.Push(currentNode._identifier);
             currentNode.SetVisited(true); 
 
             do
             {
-                stack.printList();
+                stack.ToList();
                 if(!currentNode.connections.Any(c => c.getVisitStatus() == false))
                 {
-                    stack.RemoveFromStart();
+                    stack.Pop();
                     currentNode = _nodeSet[stack.Peek().value]; 
                 }
                 else
@@ -52,18 +50,19 @@ namespace DatastructureAlgorithms.Graphs
                     currentNode = currentNode.connections.Where(c => c._isVisited == false)?.FirstOrDefault().GetCurrentNode();
 
                     currentNode.SetVisited(true);
-                    stack.InsertAtStart(currentNode._identifier);
+                    stack.Push(currentNode._identifier);
                 }
-            }while(stack.GetSize() > 0);
+            }while(!stack.isEmpty());
         } 
 
         public void BreadthFirstSearch()
         {
-            Queues<string> queue = new Queues<string>();
-            GraphNode firstNode = _nodeSet.FirstOrDefault().Value;
+            Queues<T> queue = new Queues<T>();
+            GraphNode<T> firstNode = _nodeSet.FirstOrDefault().Value;
+            T temp = null;
 
             //add firstnode to end of queue and mark node as visited
-            queue.Enqueue("start");
+            queue.Enqueue(temp);
             firstNode.SetVisited(true);
 
             while(!queue.isEmpty())
@@ -93,34 +92,19 @@ namespace DatastructureAlgorithms.Graphs
 
                     queue.Dequeue();
                     firstNode = _nodeSet[queue.Peek().value];
-                    // else
-                    // {
-                    //     queue.Dequeue();
-                    //     firstNode = _nodeSet[queue.Peek().value];
-                    // }
                 }
             }
         }
 
-        private bool FindAdjacentNode(GraphEdge[] nodeEdgeList, int index)
-        {
-            if(!nodeEdgeList[index].GetDestination().getVisitStatus())
-            {
-                return true;
-            }
+        // public override string ToString()
+        // {
+        //     string result = "";
+        //     foreach(var item in _edgeList)
+        //     {
+        //         result += item._weight + "->";
+        //     }
 
-            return false;
-        }
-
-        public override string ToString()
-        {
-            string result = "";
-            foreach(var item in _edgeList)
-            {
-                result += item._weight + "->";
-            }
-
-            return result;
-        }
+        //     return result;
+        // }
     }
 }

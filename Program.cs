@@ -16,6 +16,7 @@ using DatastructureAlgorithms.GraphEdges;
 using System.Linq;
 using DatastructureAlgorithms.HashTables;
 using System.Collections.Generic;
+using DatastructureAlgorithms.WeightedGraphs;
 
 namespace DatastructureAlgorithms
 {
@@ -23,22 +24,24 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            Graph graph = new Graph();
-            var s = graph.AddNode(new GraphNode("S"));
-            var a = graph.AddNode(new GraphNode("A"));
-            var c = graph.AddNode(new GraphNode("C"));
-            var d = graph.AddNode(new GraphNode("D"));
-            var b = graph.AddNode(new GraphNode("B"));
+            Graph<string> weightGraph = new Graph<string>();
+            var s = weightGraph.AddNode(new GraphNode<string>("S"));
+            var a = weightGraph.AddNode(new GraphNode<string>("A"));
+            var b = weightGraph.AddNode(new GraphNode<string>("B"));
+            var c = weightGraph.AddNode(new GraphNode<string>("C"));
+            var d = weightGraph.AddNode(new GraphNode<string>("D"));
 
-            graph.AddEdge(s, a);
-            graph.AddEdge(s, b);
-            graph.AddEdge(s, c);
-            graph.AddEdge(d, a);
-            graph.AddEdge(d, b);
-            graph.AddEdge(d, c);
+            weightGraph.AddEdge(s,a);
+            weightGraph.AddEdge(s,b);
+            weightGraph.AddEdge(s,c);
+            weightGraph.AddEdge(a,d);
+            weightGraph.AddEdge(b,d);
+            weightGraph.AddEdge(c,d);
 
-            graph.BreadthFirstSearch();
 
+            weightGraph.DepthFirstSearch();
+
+            //weightGraph.KruskalAlgorithm();
 
             // list.printList();
             // tree.PreOrder();

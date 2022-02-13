@@ -2,43 +2,51 @@ using DatastructureAlgorithms.GraphNodes;
 
 namespace DatastructureAlgorithms.GraphEdges
 {
-    public class GraphEdge
+    public class GraphEdge<T> where T : class
     {
-        private GraphNode _source;
-        private GraphNode _destination;
-        public int _weight;
+        private GraphNode<T> _source;
+        private GraphNode<T> _destination;
+        private int _weight;
 
-        public GraphEdge(GraphNode source, GraphNode destination, int weight)
+        public GraphEdge(GraphNode<T> source, GraphNode<T> destination)
+        {
+            _source = source;
+            _destination = destination;
+        }
+
+        public GraphEdge(GraphNode<T> source, GraphNode<T> destination, int weight)
         {
             _source = source;
             _destination = destination;
             _weight = weight;
         }
 
-        public void UpdateSource(GraphNode newSource)
+        public void SetSource(GraphNode<T> newSource)
         {
             _source = newSource;
         }
-        public void UpdateDestination(GraphNode newDestination)
+        public void SetDestination(GraphNode<T> newDestination)
         {
             _destination = newDestination;
         }
-        public void UpdateWeight(int newWeight)
-        {
-            _weight = newWeight;
-        }
 
-        public GraphNode GetSource()
+        public GraphNode<T> GetSource()
         {
            return _source;
         }
-        public GraphNode GetDestination()
+        public GraphNode<T> GetDestination()
         {
             return _destination;
         }
+
+        public void SetWeight(int weight)
+        {
+            _weight = weight;
+        }
+
         public int GetWeight()
         {
-           return _weight;
+            return _weight;
         }
     }
 }

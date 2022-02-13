@@ -4,19 +4,20 @@ using DatastructureAlgorithms.GraphEdges;
 
 namespace DatastructureAlgorithms.GraphNodes
 {
-    public class GraphNode
+    public class GraphNode<T> where T : class
     {
-        public string _identifier;
+        public T _identifier;
         public bool _isVisited;
-        public List<GraphNode> connections;
-        public GraphNode(string identifier)
+        public int Index;
+        public List<GraphNode<T>> connections;
+        public GraphNode(T identifier)
         {
             _identifier = identifier;
             _isVisited = false;
-            connections = new List<GraphNode>();
+            connections = new List<GraphNode<T>>();
         }
 
-        public void SetIdentifier(string newIdentifier)
+        public void SetIdentifier(T newIdentifier)
         {
             _identifier = newIdentifier;
         }
@@ -26,17 +27,17 @@ namespace DatastructureAlgorithms.GraphNodes
             _isVisited = SetVisitState;
         }
 
-        public void AddConnection(GraphNode connection)
+        public void AddConnection(GraphNode<T> connection)
         {
             connections.Add(connection);
         }
 
-        public List<GraphNode> GetNodeConnections()
+        public List<GraphNode<T>> GetNodeConnections()
         {
             return connections;
         }
 
-        public string GetIdentifier()
+        public T GetIdentifier()
         {
             return this._identifier;
         }
@@ -46,7 +47,7 @@ namespace DatastructureAlgorithms.GraphNodes
             return _isVisited;
         }
 
-        public bool RemoveConnection(string identifier)
+        public bool RemoveConnection(T identifier)
         {
             var result = connections.Where(c => c.GetIdentifier() == identifier).FirstOrDefault();
 
@@ -59,7 +60,7 @@ namespace DatastructureAlgorithms.GraphNodes
             return false;
         }
 
-        public GraphNode GetCurrentNode()
+        public GraphNode<T> GetCurrentNode()
         {
             return this;
         }
