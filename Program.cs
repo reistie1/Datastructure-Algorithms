@@ -24,22 +24,31 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            Graph<string> weightGraph = new Graph<string>();
-            var s = weightGraph.AddNode(new GraphNode<string>("S"));
-            var a = weightGraph.AddNode(new GraphNode<string>("A"));
-            var b = weightGraph.AddNode(new GraphNode<string>("B"));
-            var c = weightGraph.AddNode(new GraphNode<string>("C"));
-            var d = weightGraph.AddNode(new GraphNode<string>("D"));
-
-            weightGraph.AddEdge(s,a);
-            weightGraph.AddEdge(s,b);
-            weightGraph.AddEdge(s,c);
-            weightGraph.AddEdge(a,d);
-            weightGraph.AddEdge(b,d);
-            weightGraph.AddEdge(c,d);
+            WeightedGraph<string> weightGraph = new WeightedGraph<string>();
+            var s = weightGraph.AddNode("S");
+            var a = weightGraph.AddNode("A");
+            var b = weightGraph.AddNode("B");
+            var c = weightGraph.AddNode("C");
+            var d = weightGraph.AddNode("D");
+            var t = weightGraph.AddNode("T");
 
 
-            weightGraph.DepthFirstSearch();
+            weightGraph.AddEdge(a,b,6);
+            weightGraph.AddEdge(b,t,5);
+            weightGraph.AddEdge(d,t,2);
+            weightGraph.AddEdge(c,d,3);
+            weightGraph.AddEdge(c,s,8);
+            weightGraph.AddEdge(a,s,7);
+            weightGraph.AddEdge(b,c,4);
+            weightGraph.AddEdge(a,c,3);
+            weightGraph.AddEdge(b,d,2);
+
+            var result = weightGraph.KruskalAlgorithm();
+
+            foreach(var item in result)
+            {
+                Console.WriteLine("Source: " + item.GetSource()._identifier + " Destination: " + item.GetDestination()._identifier + " Weight: " + item.GetWeight());
+            }
 
             //weightGraph.KruskalAlgorithm();
 

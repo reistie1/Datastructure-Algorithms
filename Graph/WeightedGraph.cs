@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DatastructureAlgorithms.GraphEdges;
 using DatastructureAlgorithms.GraphNodes;
+using DatastructureAlgorithms.Queue;
 
 namespace DatastructureAlgorithms.WeightedGraphs
 {
@@ -14,10 +15,13 @@ namespace DatastructureAlgorithms.WeightedGraphs
     public class WeightedGraph<T> where T : class
     {
         public List<GraphNode<T>> _nodeSet;
+        public List<GraphEdge<T>> _edgeSet;
         public int VerticesCount;
         public int EdgeCount;
         public WeightedGraph()
         {
+            _nodeSet = new List<GraphNode<T>>();
+            _edgeSet = new List<GraphEdge<T>>();
         }
 
         public GraphNode<T> AddNode(T value)
@@ -30,6 +34,7 @@ namespace DatastructureAlgorithms.WeightedGraphs
             else
             {
                 _nodeSet.Add(newNode);
+                UpdateIndices();
                 return newNode;
             }
         }
@@ -56,6 +61,7 @@ namespace DatastructureAlgorithms.WeightedGraphs
             {
                 sourceNode.AddConnection(destinationNode);
                 destinationNode.AddConnection(sourceNode);
+                _edgeSet.Add(new GraphEdge<T>(sourceNode, destinationNode, weight));
             }
 
             return true;
@@ -92,6 +98,7 @@ namespace DatastructureAlgorithms.WeightedGraphs
 
         public GraphNode<T> GetRoot(Subset<T>[] subsets, GraphNode<T> node)
         {
+            Console.WriteLine(node._identifier + " " + node.Index);
             if(subsets[node.Index].Parent != node)
             {
                 subsets[node.Index].Parent = GetRoot(subsets, subsets[node.Index].Parent);
@@ -117,9 +124,8 @@ namespace DatastructureAlgorithms.WeightedGraphs
 
         public List<GraphEdge<T>> KruskalAlgorithm()
         {
-            List<GraphEdge<T>> edges = GetEdges();
+            List<GraphEdge<T>> edges = _edgeSet;
             edges.Sort((a,b) => a.GetWeight().CompareTo(b.GetWeight()));
-            Queue<GraphEdge<T>> queue = new Queue<GraphEdge<T>>(edges);
 
             Subset<T>[] subsets = new Subset<T>[_nodeSet.Count];
             for(var j = 0; j < _nodeSet.Count; j++)
@@ -128,18 +134,28 @@ namespace DatastructureAlgorithms.WeightedGraphs
             }
 
             List<GraphEdge<T>> result = new List<GraphEdge<T>>();
-            while(result.Count < _nodeSet.Count - 1)
+            foreach(var edge in edges)
             {
-                GraphEdge<T> edge = queue.Dequeue();
                 GraphNode<T> from = GetRoot(subsets, edge.GetSource());
                 GraphNode<T> to = GetRoot(subsets, edge.GetDestination());
+                Console.WriteLine("Edge: " + edge.GetDestination()._identifier + " " + edge.GetSource()._identifier + " From: " + from._identifier + " To: " + to._identifier);
+
                 if(from != to)
                 {
                     result.Add(edge);
                     Union(subsets, from, to);
                 }
             }
+           
             return result;
+        }
+
+        public List<GraphEdge<T>> PrimsAlgorithm()
+        {
+            List<GraphEdge<T>> result = new List<GraphEdge<T>>();
+
+            return result;
+
         }
     }
 }

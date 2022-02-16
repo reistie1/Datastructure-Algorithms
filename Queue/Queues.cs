@@ -14,6 +14,8 @@ namespace DatastructureAlgorithms.Queue
 
         public Queues(List<T> list)
         {
+            queue = new LinkedLists<T>();
+
             foreach(var item in list)
             {
                 queue.InsertAtEnd(item);
@@ -30,9 +32,10 @@ namespace DatastructureAlgorithms.Queue
             return queue.head;
         }
 
-        public void Dequeue()
+        public T Dequeue()
         {
-            queue.RemoveFromStart();
+            return queue.RemoveFromStart().value;
+            
         }
 
         public int Length()
