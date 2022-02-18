@@ -4,6 +4,12 @@ namespace DatastructureAlgorithms.ArraySearch
 {
     public static class ArraySearchs
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static int LinearSearch(int[] arr, int value)
         {
             for(var i = 0; i < arr.Length; i++)
@@ -17,6 +23,12 @@ namespace DatastructureAlgorithms.ArraySearch
             return -1;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static int BinarySearch(int[] arr, int value)
         {
             int low = 1;

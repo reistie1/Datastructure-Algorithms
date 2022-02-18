@@ -16,6 +16,11 @@ namespace DatastructureAlgorithms.Linked_List
             this.size = 0;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input_list"></param>
+        /// <returns></returns>
         public ListNode<T> CreateList(T[] input_list)
         {
             int index = 0;
@@ -29,6 +34,11 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public T Search(T value)
         {
             ListNode<T> current = this.head;
@@ -93,6 +103,9 @@ namespace DatastructureAlgorithms.Linked_List
             return this.tail;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void printList()
         {
             ListNode<T> temp = this.head;
@@ -112,6 +125,11 @@ namespace DatastructureAlgorithms.Linked_List
             Console.WriteLine(result); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ListNode<T> DeleteNode(T value)
         {
             ListNode<T> prev = null;
@@ -143,6 +161,10 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ListNode<T> RemoveFromStart()
         {
             
@@ -161,6 +183,10 @@ namespace DatastructureAlgorithms.Linked_List
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ListNode<T> RemoveFromEnd()
         {
             
@@ -184,11 +210,19 @@ namespace DatastructureAlgorithms.Linked_List
             return current;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ListNode<T> Peek()
         {
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int GetSize()
         {
             return this.size;

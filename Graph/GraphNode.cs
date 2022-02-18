@@ -17,26 +17,46 @@ namespace DatastructureAlgorithms.GraphNodes
             connections = new List<GraphNode<T>>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newIdentifier"></param>
         public void SetIdentifier(T newIdentifier)
         {
             _identifier = newIdentifier;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="SetVisitState"></param>
         public void SetVisited(bool SetVisitState)
         {
             _isVisited = SetVisitState;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
         public void AddConnection(GraphNode<T> connection)
         {
             connections.Add(connection);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<GraphNode<T>> GetNodeConnections()
         {
             return connections;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public T GetIdentifier()
         {
             return this._identifier;
@@ -47,6 +67,11 @@ namespace DatastructureAlgorithms.GraphNodes
             return _isVisited;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
         public bool RemoveConnection(T identifier)
         {
             var result = connections.Where(c => c.GetIdentifier() == identifier).FirstOrDefault();
@@ -60,6 +85,10 @@ namespace DatastructureAlgorithms.GraphNodes
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public GraphNode<T> GetCurrentNode()
         {
             return this;

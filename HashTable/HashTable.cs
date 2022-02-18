@@ -12,6 +12,11 @@ namespace DatastructureAlgorithms.HashTables
             _hashtable = new Dictionary<double, LinkedLists<T>>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Insert(int key, T value)
         {
             double hashKey = this.Hash(key);
@@ -28,6 +33,11 @@ namespace DatastructureAlgorithms.HashTables
             } 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Delete(int key, T value)
         {
             double hashKey = this.Hash(key);
@@ -35,6 +45,11 @@ namespace DatastructureAlgorithms.HashTables
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private double Hash(int key)
         {
             int length = key.ToString().Length;
@@ -42,6 +57,10 @@ namespace DatastructureAlgorithms.HashTables
             return length * (key * 25 % 509);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string result = "";

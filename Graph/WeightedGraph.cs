@@ -24,6 +24,11 @@ namespace DatastructureAlgorithms.WeightedGraphs
             _edgeSet = new List<GraphEdge<T>>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public GraphNode<T> AddNode(T value)
         {
             GraphNode<T> newNode = new GraphNode<T>(value);
@@ -39,11 +44,22 @@ namespace DatastructureAlgorithms.WeightedGraphs
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void UpdateIndices()
         {
             int i = 0;
             _nodeSet.ForEach(c => c.Index = i++);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceNode"></param>
+        /// <param name="destinationNode"></param>
+        /// <param name="weight"></param>
+        /// <returns></returns>
         public bool AddEdge(GraphNode<T> sourceNode, GraphNode<T> destinationNode, int weight)
         {
             GraphNode<T> source = Find(sourceNode);
@@ -67,6 +83,11 @@ namespace DatastructureAlgorithms.WeightedGraphs
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputNode"></param>
+        /// <returns></returns>
         public GraphNode<T> Find(GraphNode<T> inputNode)
         {
             foreach(var node in _nodeSet)
@@ -79,6 +100,12 @@ namespace DatastructureAlgorithms.WeightedGraphs
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subsets"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public void Union(Subset<T>[] subsets, GraphNode<T> from, GraphNode<T> to)
         {
             if(subsets[from.Index].Rank > subsets[to.Index].Rank)
@@ -96,6 +123,12 @@ namespace DatastructureAlgorithms.WeightedGraphs
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subsets"></param>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public GraphNode<T> GetRoot(Subset<T>[] subsets, GraphNode<T> node)
         {
             Console.WriteLine(node._identifier + " " + node.Index);
@@ -107,6 +140,10 @@ namespace DatastructureAlgorithms.WeightedGraphs
             return subsets[node.Index].Parent;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<GraphEdge<T>> GetEdges()
         {
             List<GraphEdge<T>> edges = new List<GraphEdge<T>>();
@@ -122,6 +159,10 @@ namespace DatastructureAlgorithms.WeightedGraphs
             return edges;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<GraphEdge<T>> KruskalAlgorithm()
         {
             List<GraphEdge<T>> edges = _edgeSet;
@@ -150,12 +191,93 @@ namespace DatastructureAlgorithms.WeightedGraphs
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<GraphEdge<T>> PrimsAlgorithm()
         {
+            // Array to store constructed MST
             List<GraphEdge<T>> result = new List<GraphEdge<T>>();
+ 
+            // Key values used to pick
+            // minimum weight edge in cut
+            int[] key = new int[_nodeSet.Count];
+            var edges = _edgeSet;
+    
+            // To represent set of vertices
+            // included in MST
+            KeyValuePair<string,bool> msSet = new KeyValuePair<string, bool>();
+            bool[] mstSet = new bool[_nodeSet.Count];
+    
+            // Initialize all keys
+            // as INFINITE
+            // for (int i = 0; i < _nodeSet.Count; i++) {
+            //     key[i] = int.MaxValue;
+            //     msSet.Key
+            // }
+ 
+            // Always include first 1st vertex in MST.
+            // Make key 0 so that this vertex is
+            // picked as first vertex
+            // First node is always root of MST
+            // key[0] = 0;
+            // parent[0] = -1;
+ 
+            // The MST will have V vertices
+            for (int count = 0; count < _nodeSet.Count - 1; count++) {
+    
+                // Pick thd minimum key vertex
+                // from the set of vertices
+                // not yet included in MST
+                //int u = minKey(key, mstSet);
+    
+                // Add the picked vertex
+                // to the MST Set
+                //mstSet[u] = true;
+ 
+                // Update key value and parent
+                // index of the adjacent vertices
+                // of the picked vertex. Consider
+                // only those vertices which are
+                // not yet included in MST
+                // for (int v = 0; v < _nodeSet.Count; v++)
+    
+                    // graph[u][v] is non zero only
+                    // for adjacent vertices of m
+                    // mstSet[v] is false for vertices
+                    // not yet included in MST Update
+                    // the key only if graph[u][v] is
+                    // smaller than key[v]
+                    // if (graph[u, v] != 0 && mstSet[v] == false
+                    //     && graph[u, v] < key[v]) {
+                    //     parent[v] = u;
+                    //     key[v] = graph[u, v];
+                    // }
+            }
 
             return result;
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="mstSet"></param>
+        /// <returns></returns>
+        public int minKey(int[] key, bool[] mstSet)
+        {
+    
+            int min = int.MaxValue, min_index = -1;
+    
+            for (int v = 0; v < _nodeSet.Count; v++)
+                if (mstSet[v] == false && key[v] < min) {
+                    min = key[v];
+                    min_index = v;
+                }
+    
+            return min_index;
         }
     }
 }

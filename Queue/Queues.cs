@@ -12,6 +12,10 @@ namespace DatastructureAlgorithms.Queue
             queue = new LinkedLists<T>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
         public Queues(List<T> list)
         {
             queue = new LinkedLists<T>();
@@ -22,32 +26,56 @@ namespace DatastructureAlgorithms.Queue
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ListNode<T> Enqueue(T value)
         {
             return queue.InsertAtEnd(value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ListNode<T> Peek()
         {
             return queue.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>    
         public T Dequeue()
         {
             return queue.RemoveFromStart().value;
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int Length()
         {
             return queue.size;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ToList()
         {
             queue.printList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool isEmpty()
         {
             return queue.size == 0;

@@ -11,6 +11,11 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             head = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ListNode<T>  InsertAtStart(T value)
         {
             if(this.head == null)
@@ -28,6 +33,11 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public T Search(T value)
         {
             ListNode<T> current = this.head;
@@ -51,6 +61,10 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return current.value;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ListNode<T>  DeleteStart()
         {
             ListNode<T> temp = this.head;
@@ -62,6 +76,11 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ListNode<T> InsertAtEnd(T value)
         {
             ListNode<T> current = this.head;
@@ -95,6 +114,12 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="newvalue"></param>
+        /// <returns></returns>
         public ListNode<T> InsertAfter(T value, T newvalue)
         {
             ListNode<T> prev = null;
@@ -116,6 +141,11 @@ namespace DatastructureAlgorithms.DoublyLinkedList
         
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ListNode<T> Delete(T value)
         {
             ListNode<T> prev = null;
@@ -152,6 +182,9 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             return this.head;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PrintForward()
         {
             ListNode<T> temp = this.head;
@@ -165,6 +198,9 @@ namespace DatastructureAlgorithms.DoublyLinkedList
             Console.WriteLine(result);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PrintInReverse()
         {
             ListNode<T> temp = this.head;

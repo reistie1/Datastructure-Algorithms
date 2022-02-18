@@ -11,20 +11,39 @@ namespace DatastructureAlgorithms.AVLTree
             this.root = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
         public void UpdateHeight(AVLTreeNode node)
         {
             node.height = 1 + Math.Max(Height(node.left), Height(node.right));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public int Height(AVLTreeNode node)
         {
             return node == null ? -1 : node.height;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         int GetBalance(AVLTreeNode node) {
             return (node == null) ? 0 : Height(node.left) - Height(node.right);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public AVLTreeNode RotateRight(AVLTreeNode y)
         {
             AVLTreeNode x = y.left;
@@ -39,6 +58,11 @@ namespace DatastructureAlgorithms.AVLTree
             return x;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public AVLTreeNode RotateLeft(AVLTreeNode y)
         {
             AVLTreeNode x = y.right;
@@ -53,6 +77,11 @@ namespace DatastructureAlgorithms.AVLTree
             return x;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public AVLTreeNode mostLeftChild(AVLTreeNode node) {
             AVLTreeNode current = node;
 
@@ -62,6 +91,11 @@ namespace DatastructureAlgorithms.AVLTree
             return current;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="z"></param>
+        /// <returns></returns>
         public AVLTreeNode Rebalance(AVLTreeNode z) 
         {
             UpdateHeight(z);
@@ -94,11 +128,21 @@ namespace DatastructureAlgorithms.AVLTree
             return z;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
         public void insert(int key)
         {
             root = Insert(this.root, key);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public AVLTreeNode Insert(AVLTreeNode node, int key) 
         {
             if (node == null) 
@@ -160,7 +204,11 @@ namespace DatastructureAlgorithms.AVLTree
             return node;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public AVLTreeNode Find(int key) 
         {
             AVLTreeNode current = this.root;

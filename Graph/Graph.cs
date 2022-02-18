@@ -17,18 +17,32 @@ namespace DatastructureAlgorithms.Graphs
             _nodeSet = new Dictionary<T,GraphNode<T>>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newNode"></param>
+        /// <returns></returns>
         public GraphNode<T> AddNode(GraphNode<T> newNode)
         {
             _nodeSet.Add(newNode.GetIdentifier(), newNode);
 
             return newNode;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sourceNode"></param>
+        /// <param name="destinationNode"></param>
         public void AddEdge(GraphNode<T> sourceNode, GraphNode<T> destinationNode)
         {
             _nodeSet[destinationNode.GetIdentifier()].AddConnection(sourceNode);
             _nodeSet[sourceNode.GetIdentifier()].AddConnection(destinationNode);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void DepthFirstSearch()
         {
             Stacks<T> stack = new Stacks<T>();
@@ -55,6 +69,9 @@ namespace DatastructureAlgorithms.Graphs
             }while(!stack.isEmpty());
         } 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void BreadthFirstSearch()
         {
             Queues<T> queue = new Queues<T>();

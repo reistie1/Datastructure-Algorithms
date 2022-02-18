@@ -12,21 +12,34 @@ namespace DatastructureAlgorithms.BinaryTree
             root = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void InOrder()
         {
             InOrderTraversal(this.root);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PreOrder()
         {
             PreOrderTraversal(this.root);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void PostOrder()
         {
             PostOrderTraversal(this.root);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
         private void PreOrderTraversal(TreeNode node)
         {
             if(node != null)
@@ -37,6 +50,10 @@ namespace DatastructureAlgorithms.BinaryTree
             } 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
         private void PostOrderTraversal(TreeNode node)
         {
             if(node != null)
@@ -47,6 +64,10 @@ namespace DatastructureAlgorithms.BinaryTree
             } 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
         private void InOrderTraversal(TreeNode node)
         {
             if(node != null)
@@ -63,6 +84,12 @@ namespace DatastructureAlgorithms.BinaryTree
             this.root = InsertNode(this.root, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private TreeNode InsertNode(TreeNode root, int value)
         {
             if(root == null)
@@ -83,11 +110,22 @@ namespace DatastructureAlgorithms.BinaryTree
             return root;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool DeleteNode(int value)
         {
             return DeleteTreeNode(this.root, value) == null ? false : true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private TreeNode DeleteTreeNode(TreeNode node, int value)
         {
             if(node == null)
@@ -130,11 +168,22 @@ namespace DatastructureAlgorithms.BinaryTree
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public bool Search(int value)
         {
             return SearchTree(this.root, value) == null ? false : true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private TreeNode SearchTree(TreeNode node, int value)
         {
             if(node.Key == value || node == null)
