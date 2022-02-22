@@ -1,5 +1,6 @@
 using System;
 using DatastructureAlgorithms.AVLTreeNodes;
+using DatastructureAlgorithms.TreeBases;
 
 namespace DatastructureAlgorithms.AVLTree
 {

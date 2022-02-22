@@ -43,12 +43,12 @@ namespace DatastructureAlgorithms
             weightGraph.AddEdge(a,c,3);
             weightGraph.AddEdge(b,d,2);
 
-            var result = weightGraph.KruskalAlgorithm();
+            // var result = weightGraph.KruskalAlgorithm();
 
-            foreach(var item in result)
-            {
-                Console.WriteLine("Source: " + item.GetSource()._identifier + " Destination: " + item.GetDestination()._identifier + " Weight: " + item.GetWeight());
-            }
+            // foreach(var item in result)
+            // {
+            //     Console.WriteLine("Source: " + item.GetSource()._identifier + " Destination: " + item.GetDestination()._identifier + " Weight: " + item.GetWeight());
+            // }
 
             //weightGraph.KruskalAlgorithm();
 
