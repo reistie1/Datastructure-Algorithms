@@ -24,24 +24,35 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            WeightedGraph<string> weightGraph = new WeightedGraph<string>();
-            var s = weightGraph.AddNode("S");
-            var a = weightGraph.AddNode("A");
-            var b = weightGraph.AddNode("B");
-            var c = weightGraph.AddNode("C");
-            var d = weightGraph.AddNode("D");
-            var t = weightGraph.AddNode("T");
+            LinkedLists<string> List = new LinkedLists<string>();
+
+            List.InsertAtStart("Josh");
+            List.InsertAtEnd("Adam");
+            List.InsertAtEnd("Noah");
+            List.InsertAtEnd("Sydney");
+    
+            Console.WriteLine(List.Peek().Value);
+
+            List.PrintList();
+            //Console.WriteLine(List.Search("Sydney"));
+            // WeightedGraph<string> weightGraph = new WeightedGraph<string>();
+            // var s = weightGraph.AddNode("S");
+            // var a = weightGraph.AddNode("A");
+            // var b = weightGraph.AddNode("B");
+            // var c = weightGraph.AddNode("C");
+            // var d = weightGraph.AddNode("D");
+            // var t = weightGraph.AddNode("T");
 
 
-            weightGraph.AddEdge(a,b,6);
-            weightGraph.AddEdge(b,t,5);
-            weightGraph.AddEdge(d,t,2);
-            weightGraph.AddEdge(c,d,3);
-            weightGraph.AddEdge(c,s,8);
-            weightGraph.AddEdge(a,s,7);
-            weightGraph.AddEdge(b,c,4);
-            weightGraph.AddEdge(a,c,3);
-            weightGraph.AddEdge(b,d,2);
+            // weightGraph.AddEdge(a,b,6);
+            // weightGraph.AddEdge(b,t,5);
+            // weightGraph.AddEdge(d,t,2);
+            // weightGraph.AddEdge(c,d,3);
+            // weightGraph.AddEdge(c,s,8);
+            // weightGraph.AddEdge(a,s,7);
+            // weightGraph.AddEdge(b,c,4);
+            // weightGraph.AddEdge(a,c,3);
+            // weightGraph.AddEdge(b,d,2);
 
             // var result = weightGraph.KruskalAlgorithm();
 
@@ -50,7 +61,7 @@ namespace DatastructureAlgorithms
             //     Console.WriteLine("Source: " + item.GetSource()._identifier + " Destination: " + item.GetDestination()._identifier + " Weight: " + item.GetWeight());
             // }
 
-            weightGraph.PrimsAlgorithm();
+            //weightGraph.PrimsAlgorithm();
 
             // List.PrintList();
             // tree.PreOrder();
