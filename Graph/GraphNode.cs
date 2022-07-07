@@ -8,6 +8,7 @@ namespace DatastructureAlgorithms.GraphNodes
     {
         public T _identifier;
         public bool _isVisited;
+        public int _weight;
         public int Index;
         public List<GraphNode<T>> connections;
         public GraphNode(T identifier)
@@ -15,6 +16,15 @@ namespace DatastructureAlgorithms.GraphNodes
             _identifier = identifier;
             _isVisited = false;
             connections = new List<GraphNode<T>>();
+            _weight = 0;
+        }
+
+        public GraphNode(T identifier, int weight)
+        {
+            _identifier = identifier;
+            _isVisited = false;
+            connections = new List<GraphNode<T>>();
+            _weight = weight;
         }
 
         /// <summary>

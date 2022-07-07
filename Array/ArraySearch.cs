@@ -7,16 +7,16 @@ namespace DatastructureAlgorithms.ArraySearch
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="arr"></param>
-        /// <param name="value"></param>
+        /// <param name="Arr"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public static int LinearSearch(int[] arr, int value)
+        public static int LinearSearch(int[] Arr, int Value)
         {
-            for(var i = 0; i < arr.Length; i++)
+            for(var i = 0; i < Arr.Length; i++)
             {
-                if(arr[i] == value)
+                if(Arr[i] == Value)
                 {
-                    return arr[i];
+                    return Arr[i];
                 }
             }
 
@@ -26,38 +26,38 @@ namespace DatastructureAlgorithms.ArraySearch
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="arr"></param>
-        /// <param name="value"></param>
+        /// <param name="Arr"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public static int BinarySearch(int[] arr, int value)
+        public static int BinarySearch(int[] Arr, int Value)
         {
-            int low = 1;
-            int high = arr.Length;
-            int mid = 0;
+            int Low = 1;
+            int High = Arr.Length;
+            int Mid = 0;
             
 
             do
             {
-                mid = (low + (low + high) / 2);
+                Mid = (Low + (Low + High) / 2);
 
-                if(mid > arr.Length)
+                if(Mid > Arr.Length)
                 {
                     break;
                 }
 
-                if(value < arr[mid])
+                if(Value < Arr[Mid])
                 {
-                    high = mid - 1;
+                    High = Mid - 1;
                 }
-                if(value > arr[mid])
+                else if(Value > Arr[Mid])
                 {
-                    low = mid + 1;
+                    Low = Mid + 1;
                 }
-                if(value == arr[mid])
+                else
                 {
-                    return arr[mid];
+                    return Arr[Mid];
                 }
-            }while(low < high);
+            }while(Low < High);
 
             return -1;
 

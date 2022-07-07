@@ -5,11 +5,11 @@ namespace DatastructureAlgorithms.TreeBases
 {
     public class TreeBase
     {
-        public TreeNode root;
+        public TreeNode Root;
 
         public TreeBase()
         {
-            root = null;
+            Root = null;
         }
 
         
@@ -18,7 +18,7 @@ namespace DatastructureAlgorithms.TreeBases
         /// </summary>
         public void InOrder()
         {
-            InOrderTraversal(this.root);
+            InOrderTraversal(this.Root);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace DatastructureAlgorithms.TreeBases
         /// </summary>
         public void PreOrder()
         {
-            PreOrderTraversal(this.root);
+            PreOrderTraversal(this.Root);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace DatastructureAlgorithms.TreeBases
         /// </summary>
         public void PostOrder()
         {
-            PostOrderTraversal(this.root);
+            PostOrderTraversal(this.Root);
         }
 
         /// <summary>

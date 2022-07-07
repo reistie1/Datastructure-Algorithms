@@ -6,34 +6,34 @@ namespace DatastructureAlgorithms.Queue
 {
     public class Queues<T> where T : class
     {
-        public LinkedLists<T> queue;
+        public LinkedLists<T> Queue;
         public Queues()
         {
-            queue = new LinkedLists<T>();
+            Queue = new LinkedLists<T>();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="list"></param>
-        public Queues(List<T> list)
+        /// <param name="List"></param>
+        public Queues(List<T> List)
         {
-            queue = new LinkedLists<T>();
+            Queue = new LinkedLists<T>();
 
-            foreach(var item in list)
+            foreach(var item in List)
             {
-                queue.InsertAtEnd(item);
+                Queue.InsertAtEnd(item);
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> Enqueue(T value)
+        public ListNode<T> Enqueue(T Value)
         {
-            return queue.InsertAtEnd(value);
+            return Queue.InsertAtEnd(Value);
         }
 
         /// <summary>
@@ -42,16 +42,16 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>
         public ListNode<T> Peek()
         {
-            return queue.head;
+            return Queue.Head;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>    
-        public T Dequeue()
+        public T DeQueue()
         {
-            return queue.RemoveFromStart().value;
+            return Queue.RemoveFromStart().Value;
             
         }
 
@@ -61,7 +61,7 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>
         public int Length()
         {
-            return queue.size;
+            return Queue.Size;
         }
 
         /// <summary>
@@ -69,16 +69,16 @@ namespace DatastructureAlgorithms.Queue
         /// </summary>
         public void ToList()
         {
-            queue.printList();
+            Queue.PrintList();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool isEmpty()
+        public bool IsEmpty()
         {
-            return queue.size == 0;
+            return Queue.Size == 0;
         }
     }
 }

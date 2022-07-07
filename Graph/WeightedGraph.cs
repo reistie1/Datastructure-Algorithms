@@ -1,3 +1,4 @@
+using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +17,25 @@ namespace DatastructureAlgorithms.WeightedGraphs
     {
         public List<GraphNode<T>> _nodeSet;
         public List<GraphEdge<T>> _edgeSet;
-        public int VerticesCount;
+        public int VerticesCount = 6; 
+        public Dictionary<T, LinkedList<GraphNode<T>>> _adjacencyList;
+
         public int EdgeCount;
         public WeightedGraph()
         {
             _nodeSet = new List<GraphNode<T>>();
             _edgeSet = new List<GraphEdge<T>>();
+            _adjacencyList = new Dictionary<T, LinkedList<GraphNode<T>>>();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public GraphNode<T> AddNode(T value)
+        public GraphNode<T> AddNode(T Value)
         {
-            GraphNode<T> newNode = new GraphNode<T>(value);
+            GraphNode<T> newNode = new GraphNode<T>(Value);
             if(Find(newNode) != null)
             {
                 return null;
@@ -39,6 +43,7 @@ namespace DatastructureAlgorithms.WeightedGraphs
             else
             {
                 _nodeSet.Add(newNode);
+                _adjacencyList.Add(Value, new LinkedList<GraphNode<T>>());
                 UpdateIndices();
                 return newNode;
             }
@@ -78,6 +83,9 @@ namespace DatastructureAlgorithms.WeightedGraphs
                 sourceNode.AddConnection(destinationNode);
                 destinationNode.AddConnection(sourceNode);
                 _edgeSet.Add(new GraphEdge<T>(sourceNode, destinationNode, weight));
+                
+                _adjacencyList[sourceNode._identifier].AddLast(new LinkedListNode<GraphNode<T>>(new GraphNode<T>(destinationNode._identifier, weight)));
+                _adjacencyList[destinationNode._identifier].AddLast(new LinkedListNode<GraphNode<T>>(new GraphNode<T>(sourceNode._identifier, weight)));
             }
 
             return true;
@@ -195,44 +203,66 @@ namespace DatastructureAlgorithms.WeightedGraphs
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<GraphEdge<T>> PrimsAlgorithm()
+        public List<GraphNode<T>> PrimsAlgorithm()
         {
-            List<GraphEdge<T>> result = new List<GraphEdge<T>>();
- 
-            // Key values used to pick
-            // minimum weight edge in cut
-            int[] key = new int[_nodeSet.Count];
-            var edges = _edgeSet;
-    
-            // To represent set of vertices
-            // included in MST
-            KeyValuePair<string,bool> msSet = new KeyValuePair<string, bool>();
-    
-           
+
             
+            Dictionary<GraphNode<T>, bool> msSet = new Dictionary<GraphNode<T>, bool>();
+            Dictionary<GraphNode<T>, int> Keys = new Dictionary<GraphNode<T>, int>();
+            List<GraphNode<T>> result = new List<GraphNode<T>>();
+
+            foreach(var node in _nodeSet)
+            {
+                msSet.Add(node, false);
+                Keys.Add(node, int.MaxValue);
+            }
+
+            Keys[_nodeSet.First()] = 0;
+            msSet[_nodeSet.First()] = true;
+
+            for(var i = 0; i < VerticesCount - 1; i++)
+            {
+                GraphNode<T> u = MinKey(Keys, msSet);
+                //msSet[u] = true;
+
+                for(int j = 0; j < VerticesCount; j++)
+                {
+                    
+                }
+
+            }
+
 
             return result;
-
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="Key"></param>
         /// <param name="mstSet"></param>
         /// <returns></returns>
-        public int minKey(int[] key, bool[] mstSet)
+        public GraphNode<T> MinKey(Dictionary<GraphNode<T>, int> Key, Dictionary<GraphNode<T>, bool> msSet)
         {
-    
-            int min = int.MaxValue, min_index = -1;
-    
-            for (int v = 0; v < _nodeSet.Count; v++)
-                if (mstSet[v] == false && key[v] < min) {
-                    min = key[v];
-                    min_index = v;
-                }
-    
-            return min_index;
+            
+            // if(_adjacencyList.Where(c => c.Key == Key[]))
+            // {
+
+            // }
+            // foreach(var item in _adjacencyList)
+            // {
+            //     var List = item.Value.ToList();
+            //     var result = "";
+            //     foreach(var NextItem in List)
+            //     {
+            //         result = result + $"{item.Key} {NextItem._identifier} {NextItem._weight} -->";
+            //     }
+            //     Console.WriteLine(result);
+            // }
+
+
+
+            return null;
         }
     }
 }

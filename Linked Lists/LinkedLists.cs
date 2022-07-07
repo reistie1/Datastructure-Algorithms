@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Datastructures_LinkedList;
 using System;
 
@@ -6,121 +5,121 @@ namespace DatastructureAlgorithms.Linked_List
 {
     public class LinkedLists<T> where T : class
     {
-        public ListNode<T> head;
-        public ListNode<T> tail;
-        public int size;
+        public ListNode<T> Head;
+        public ListNode<T> Tail;
+        public int Size;
         public LinkedLists()
         {
-            this.head = null;
-            this.tail = null;
-            this.size = 0;
+            this.Head = null;
+            this.Tail = null;
+            this.Size = 0;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="input_list"></param>
+        /// <param name="input_List"></param>
         /// <returns></returns>
-        public ListNode<T> CreateList(T[] input_list)
+        public ListNode<T> CreateList(T[] List)
         {
             int index = 0;
 
             do
             {
-                this.InsertAtEnd(input_list[index++]);
-                this.size++;
-            }while(index <= input_list.Length - 1);
+                this.InsertAtEnd(List[index++]);
+                this.Size++;
+            }while(index <= List.Length - 1);
 
-            return this.head;
+            return this.Head;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public T Search(T value)
+        public T Search(T Value)
         {
-            ListNode<T> current = this.head;
+            ListNode<T> Current = this.Head;
 
-            if(this.head == null)
+            if(this.Head == null)
             {
                 return null;
             }
 
             do
             {
-                current = current.next;
-            }while(current != null && !current.value.Equals(value));
+                Current = Current.Next;
+            }while(Current != null && !Current.Value.Equals(Value));
 
             
-            if(current == null)
+            if(Current == null)
             {
                 return null;
             }
 
-            return current.value;
+            return Current.Value;
         }
 
-        public ListNode<T> InsertAtStart(T value)
+        public ListNode<T> InsertAtStart(T Value)
         {
-            ListNode<T> newNode = new ListNode<T>(value);
+            ListNode<T> newNode = new ListNode<T>(Value);
 
-            if(this.head == null)
+            if(this.Head == null)
             {
-                this.head = newNode;
-                this.tail = this.head;
+                this.Head = newNode;
+                this.Tail = this.Head;
             }
             else
             {
-                newNode.next = this.head;
-                this.head = newNode;
+                newNode.Next = this.Head;
+                this.Head = newNode;
             }
 
-            this.size++;
+            this.Size++;
             
-            return this.head;
+            return this.Head;
         }
 
-        public ListNode<T> InsertAtEnd(T value)
+        public ListNode<T> InsertAtEnd(T Value)
         {
-            ListNode<T> newNode = new ListNode<T>(value);
-            ListNode<T> current = this.head;
+            ListNode<T> newNode = new ListNode<T>(Value);
+            ListNode<T> current = this.Head;
 
             if(current == null)
             {
-                this.head = newNode;
-                this.tail = this.head;
-                this.size++;
+                this.Head = newNode;
+                this.Tail = this.Head;
+                this.Size++;
 
-                return this.head;
+                return this.Head;
             }
 
-            this.tail.next = newNode;
-            this.tail = newNode;
-            this.size++;
+            this.Tail.Next = newNode;
+            this.Tail = newNode;
+            this.Size++;
 
-            return this.tail;
+            return this.Tail;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void printList()
+        public void PrintList()
         {
-            ListNode<T> temp = this.head;
+            ListNode<T> Temp = this.Head;
             string result = "";
 
-            if(temp == null)
+            if(Temp == null)
             {
                 return;
             }
             
             do
             {
-                result += $"{temp.value} ->"; 
-                temp = temp.next;
-            }while(temp != null);
+                result += $"{Temp.Value} ->"; 
+                Temp = Temp.Next;
+            }while(Temp != null);
 
             Console.WriteLine(result); 
         }
@@ -128,37 +127,37 @@ namespace DatastructureAlgorithms.Linked_List
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> DeleteNode(T value)
+        public ListNode<T> DeleteNode(T Value)
         {
-            ListNode<T> prev = null;
-            ListNode<T> curr = this.head;
+            ListNode<T> Prev = null;
+            ListNode<T> curr = this.Head;
 
-            if(curr.value == value)
+            if(curr.Value == Value)
             {
-                if(this.head.next == null)
+                if(this.Head.Next == null)
                 {
-                    this.head = null;
+                    this.Head = null;
                 }
                 else
                 {
-                    this.head = this.head.next;
-                    curr.next = null;
+                    this.Head = this.Head.Next;
+                    curr.Next = null;
                 }
-                return this.head;
+                return this.Head;
             }
 
             do
             {
-                prev = curr;
-                curr = curr.next;
-            }while(curr.value != value);
+                Prev = curr;
+                curr = curr.Next;
+            }while(curr.Value != Value);
 
-            prev.next = curr.next;
-            curr.next = null;
+            Prev.Next = curr.Next;
+            curr.Next = null;
 
-            return this.head;
+            return this.Head;
         }
 
         /// <summary>
@@ -168,19 +167,19 @@ namespace DatastructureAlgorithms.Linked_List
         public ListNode<T> RemoveFromStart()
         {
             
-            if(this.head.next != null)
+            if(this.Head.Next != null)
             {
-                var temp = this.head;
+                var Temp = this.Head;
                 
-                this.head = this.head.next;
-                temp.next = null;
-                this.size--;
+                this.Head = this.Head.Next;
+                Temp.Next = null;
+                this.Size--;
 
-                return this.head;
+                return this.Head;
             }
 
-            this.size = 0;
-            return this.head;
+            this.Size = 0;
+            return this.Head;
         }
 
         /// <summary>
@@ -190,8 +189,8 @@ namespace DatastructureAlgorithms.Linked_List
         public ListNode<T> RemoveFromEnd()
         {
             
-            ListNode<T> current = this.head;
-            ListNode<T> prev = null;
+            ListNode<T> current = this.Head;
+            ListNode<T> Prev = null;
 
             if(current == null)
             {
@@ -200,12 +199,12 @@ namespace DatastructureAlgorithms.Linked_List
 
             do
             {
-                prev = current;
-                current = current.next;
-            }while(current.next != null);
+                Prev = current;
+                current = current.Next;
+            }while(current.Next != null);
 
-            prev.next = null;
-            this.size--;
+            Prev.Next = null;
+            this.Size--;
 
             return current;
         }
@@ -216,7 +215,7 @@ namespace DatastructureAlgorithms.Linked_List
         /// <returns></returns>
         public ListNode<T> Peek()
         {
-            return this.head;
+            return this.Head;
         }
 
         /// <summary>
@@ -225,7 +224,7 @@ namespace DatastructureAlgorithms.Linked_List
         /// <returns></returns>
         public int GetSize()
         {
-            return this.size;
+            return this.Size;
         }
     }
 }

@@ -5,10 +5,10 @@ namespace DatastructureAlgorithms.Trees
         public TreeNode Left;
         public TreeNode Right;
         public int Key;
-        public TreeNode(int key = 0)
+        public TreeNode(int Key = 0)
         {
             this.Left = this.Right = null;
-            this.Key = key;
+            this.Key = Key;
         }
     }
 }

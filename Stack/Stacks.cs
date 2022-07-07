@@ -6,20 +6,20 @@ namespace DatastructureAlgorithms.Stack
 {
     public class Stacks<T> where T : class
     {
-        public LinkedLists<T> stack;
+        public LinkedLists<T> Stack;
         public Stacks()
         {
-            stack = new LinkedLists<T>();
+            Stack = new LinkedLists<T>();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> Push(T value)
+        public ListNode<T> Push(T Value)
         {
-            return stack.InsertAtStart(value);
+            return Stack.InsertAtStart(Value);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public ListNode<T> Peek()
         {
-            return stack.head;
+            return Stack.Head;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace DatastructureAlgorithms.Stack
         /// </summary>
         public void Pop()
         {
-            stack.RemoveFromStart();
+            Stack.RemoveFromStart();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public int Length()
         {
-            return stack.size;
+            return Stack.Size;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace DatastructureAlgorithms.Stack
         /// </summary>
         public void ToList()
         {
-            stack.printList();
+            Stack.PrintList();
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public bool isEmpty()
         {
-            return stack.size == 0;
+            return Stack.Size == 0;
         }
     }
 }

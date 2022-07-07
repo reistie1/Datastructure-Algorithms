@@ -2,46 +2,46 @@ namespace DatastructureAlgorithms.ArraySorting
 {
     public static class ArraySortings
     {
-        public static int[] BubbleSort(int[] unsortedArray)
+        public static int[] BubbleSort(int[] UnsortedArray)
         {
-            for(var i = 0; i < unsortedArray.Length - 1; i++)
+            for(var i = 0; i < UnsortedArray.Length - 1; i++)
             {
-                for(var j = 1; j < unsortedArray.Length - 1; j++)
+                for(var j = 1; j < UnsortedArray.Length - 1; j++)
                 {
-                    if(unsortedArray[j] > unsortedArray[j+1])
+                    if(UnsortedArray[j] > UnsortedArray[j+1])
                     {
-                        int temp = unsortedArray[j];
-                        unsortedArray[j] = unsortedArray[j+1];
-                        unsortedArray[j+1] = temp;
+                        int Temp = UnsortedArray[j];
+                        UnsortedArray[j] = UnsortedArray[j+1];
+                        UnsortedArray[j+1] = Temp;
                     }
                 }
             }
 
-            return unsortedArray;
+            return UnsortedArray;
         }
 
-        public static int[] SelectionSort(int[] unsortedArray)
+        public static int[] SelectionSort(int[] UnsortedArray)
         {
-            for(var i = 0; i <= unsortedArray.Length - 1; i++)
+            for(var i = 0; i <= UnsortedArray.Length - 1; i++)
             {
-                var min = i;
-                for(var j = i + 1; j < unsortedArray.Length; j++)
+                var Min = i;
+                for(var j = i + 1; j < UnsortedArray.Length; j++)
                 {
-                    if(unsortedArray[j] < unsortedArray[min])
+                    if(UnsortedArray[j] < UnsortedArray[Min])
                     {
-                        min = j;
+                        Min = j;
                     }
                 }
 
-                if (min != i)
+                if (Min != i)
                 {
-                    var temp = unsortedArray[min];
-                    unsortedArray[min] = unsortedArray[i];
-                    unsortedArray[i] = temp;
+                    var Temp = UnsortedArray[Min];
+                    UnsortedArray[Min] = UnsortedArray[i];
+                    UnsortedArray[i] = Temp;
                 }
             }
 
-            return unsortedArray;
+            return UnsortedArray;
         }
     }
 

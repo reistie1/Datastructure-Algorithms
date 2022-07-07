@@ -50,9 +50,9 @@ namespace DatastructureAlgorithms
             //     Console.WriteLine("Source: " + item.GetSource()._identifier + " Destination: " + item.GetDestination()._identifier + " Weight: " + item.GetWeight());
             // }
 
-            //weightGraph.KruskalAlgorithm();
+            weightGraph.PrimsAlgorithm();
 
-            // list.printList();
+            // List.PrintList();
             // tree.PreOrder();
             // tree.PostOrder();
             // tree.DeleteNode(50);
@@ -61,7 +61,7 @@ namespace DatastructureAlgorithms
 
             //     Console.WriteLine("Menu Options");
             //     Console.WriteLine("-----------------");
-            //     Console.WriteLine("Linked List - ll\nBinary Search Tree - bst\nQueue - queue\nStack - stack \n");
+            //     Console.WriteLine("Linked List - ll\nBinary Search Tree - bst\nQueue - Queue\nStack - Stack \n");
             //     Console.WriteLine("Please select an options");
 
             // do{
@@ -70,16 +70,16 @@ namespace DatastructureAlgorithms
             //     switch(input)
             //     {
             //         case "ll":
-            //             Console.WriteLine("You have chosen to use a linked list\n");
+            //             Console.WriteLine("You have chosen to use a linked List\n");
             //             break;
             //         case "bst":
             //             Console.WriteLine("You have chosen a binary search tree\n");
             //             break;
-            //         case "queue":
-            //             Console.WriteLine("You have chosen a queue\n");
+            //         case "Queue":
+            //             Console.WriteLine("You have chosen a Queue\n");
             //             break;
-            //         case "stack":
-            //             Console.WriteLine("You have chosen a stack\n");
+            //         case "Stack":
+            //             Console.WriteLine("You have chosen a Stack\n");
             //             break;
             //         default:
             //             break;

@@ -15,46 +15,46 @@ namespace DatastructureAlgorithms.HashTables
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void Insert(int key, T value)
+        /// <param name="Key"></param>
+        /// <param name="Value"></param>
+        public void Insert(int Key, T Value)
         {
-            double hashKey = this.Hash(key);
+            double hashKey = this.Hash(Key);
             Console.WriteLine(hashKey);
 
             if(_hashtable.ContainsKey(hashKey))
             {
-                _hashtable[hashKey].InsertAtEnd(value);
+                _hashtable[hashKey].InsertAtEnd(Value);
             }
             else
             {
                 _hashtable[hashKey] = new LinkedLists<T>();
-                _hashtable[hashKey].InsertAtStart(value);
+                _hashtable[hashKey].InsertAtStart(Value);
             } 
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void Delete(int key, T value)
+        /// <param name="Key"></param>
+        /// <param name="Value"></param>
+        public void Delete(int Key, T Value)
         {
-            double hashKey = this.Hash(key);
-            _hashtable[hashKey].DeleteNode(value);
+            double hashKey = this.Hash(Key);
+            _hashtable[hashKey].DeleteNode(Value);
 
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="Key"></param>
         /// <returns></returns>
-        private double Hash(int key)
+        private double Hash(int Key)
         {
-            int length = key.ToString().Length;
+            int length = Key.ToString().Length;
 
-            return length * (key * 25 % 509);
+            return length * (Key * 25 % 509);
         }
 
         /// <summary>
@@ -67,9 +67,9 @@ namespace DatastructureAlgorithms.HashTables
 
             foreach(var item in _hashtable)
             {
-                if(item.Value.head != null)
+                if(item.Value.Head != null)
                 {
-                    item.Value.printList();
+                    item.Value.PrintList();
 
                 }
             }

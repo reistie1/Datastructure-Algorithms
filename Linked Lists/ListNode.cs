@@ -2,14 +2,14 @@ namespace Datastructures_LinkedList
 {
     public class ListNode<T> where T : class
     {
-        public T value;
-        public ListNode<T> next;
-        public ListNode<T> prev;
-        public ListNode(T value)
+        public T Value;
+        public ListNode<T> Next;
+        public ListNode<T> Prev;
+        public ListNode(T Value)
         {
-            this.value = value;
-            this.next = null;
-            this.prev = null;
+            this.Value = Value;
+            this.Next = null;
+            this.Prev = null;
         }
     }
 }

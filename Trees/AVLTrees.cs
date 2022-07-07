@@ -6,10 +6,10 @@ namespace DatastructureAlgorithms.AVLTree
 {
     public class AVLTrees
     {
-        public AVLTreeNode root;
+        public AVLTreeNode Root;
         public AVLTrees()
         {
-            this.root = null;
+            this.Root = null;
         }
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace DatastructureAlgorithms.AVLTree
         /// <param name="node"></param>
         public void UpdateHeight(AVLTreeNode node)
         {
-            node.height = 1 + Math.Max(Height(node.left), Height(node.right));
+            node.Height = 1 + Math.Max(Height(node.Left), Height(node.Right));
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace DatastructureAlgorithms.AVLTree
         /// <returns></returns>
         public int Height(AVLTreeNode node)
         {
-            return node == null ? -1 : node.height;
+            return node == null ? -1 : node.Height;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace DatastructureAlgorithms.AVLTree
         /// <param name="node"></param>
         /// <returns></returns>
         int GetBalance(AVLTreeNode node) {
-            return (node == null) ? 0 : Height(node.left) - Height(node.right);
+            return (node == null) ? 0 : Height(node.Left) - Height(node.Right);
         }
 
         /// <summary>
@@ -47,11 +47,11 @@ namespace DatastructureAlgorithms.AVLTree
         /// <returns></returns>
         public AVLTreeNode RotateRight(AVLTreeNode y)
         {
-            AVLTreeNode x = y.left;
-            AVLTreeNode z = x.right;
+            AVLTreeNode x = y.Left;
+            AVLTreeNode z = x.Right;
 
-            x.right = y;
-            y.left = z;
+            x.Right = y;
+            y.Left = z;
 
             UpdateHeight(y);
             UpdateHeight(x);
@@ -66,11 +66,11 @@ namespace DatastructureAlgorithms.AVLTree
         /// <returns></returns>
         public AVLTreeNode RotateLeft(AVLTreeNode y)
         {
-            AVLTreeNode x = y.right;
-            AVLTreeNode z = x.left;
+            AVLTreeNode x = y.Right;
+            AVLTreeNode z = x.Left;
 
-            x.left = y;
-            y.right = z;
+            x.Left = y;
+            y.Right = z;
 
             UpdateHeight(y);
             UpdateHeight(x);
@@ -86,8 +86,8 @@ namespace DatastructureAlgorithms.AVLTree
         public AVLTreeNode mostLeftChild(AVLTreeNode node) {
             AVLTreeNode current = node;
 
-            while (current.left != null) {
-                current = current.left;
+            while (current.Left != null) {
+                current = current.Left;
             }
             return current;
         }
@@ -104,24 +104,24 @@ namespace DatastructureAlgorithms.AVLTree
     
             if (balance > 1) 
             {
-                if (Height(z.left.left) > Height(z.left.right))
+                if (Height(z.Left.Left) > Height(z.Left.Right))
                 {   
                     z = RotateRight(z);
                 }
                 else 
                 {
-                    z.left = RotateLeft(z.left);
+                    z.Left = RotateLeft(z.Left);
                     z = RotateRight(z);
                 }
             }
             else if(balance < -1)
             {
-                if(Height(z.right.right) > Height(z.right.left))
+                if(Height(z.Right.Right) > Height(z.Right.Left))
                 {
                     z = RotateLeft(z);
                 }
                 else {
-                    z.right = RotateRight(z.right);
+                    z.Right = RotateRight(z.Right);
                     z = RotateLeft(z);
                 }
             }
@@ -132,70 +132,70 @@ namespace DatastructureAlgorithms.AVLTree
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
-        public void insert(int key)
+        /// <param name="Key"></param>
+        public void insert(int Key)
         {
-            root = Insert(this.root, key);
+            Root = Insert(this.Root, Key);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="node"></param>
-        /// <param name="key"></param>
+        /// <param name="Key"></param>
         /// <returns></returns>
-        public AVLTreeNode Insert(AVLTreeNode node, int key) 
+        public AVLTreeNode Insert(AVLTreeNode node, int Key) 
         {
             if (node == null) 
             {
-                return new AVLTreeNode(key);
+                return new AVLTreeNode(Key);
             } 
-            else if (key < node.data) 
+            else if (Key < node.Data) 
             {
-                node.left = Insert(node.left, key);
+                node.Left = Insert(node.Left, Key);
             } 
-            else if (key > node.data) 
+            else if (Key > node.Data) 
             {
-                node.right = Insert(node.right, key);
+                node.Right = Insert(node.Right, Key);
             } 
             else 
             {
                 throw new Exception("duplicate Key!");
             }
-            Console.WriteLine(node.data);
+            Console.WriteLine(node.Data);
             return Rebalance(node);
         }
 
         public void InOrder()
         {
-            InOrderTraversal(this.root);
+            InOrderTraversal(this.Root);
         }
 
         private void InOrderTraversal(AVLTreeNode node)
         {
             if(node != null)
             {
-                InOrderTraversal(node.left);
-                Console.WriteLine(node.data + " ");
-                InOrderTraversal(node.right);
+                InOrderTraversal(node.Left);
+                Console.WriteLine(node.Data + " ");
+                InOrderTraversal(node.Right);
             }            
         }
 
-        public AVLTreeNode delete(AVLTreeNode node, int key)
+        public AVLTreeNode delete(AVLTreeNode node, int Key)
         {
             if (node == null) {
                 return node;
-            } else if (node.data > key) {
-                node.left = delete(node.left, key);
-            } else if (node.data < key) {
-                node.right = delete(node.right, key);
+            } else if (node.Data > Key) {
+                node.Left = delete(node.Left, Key);
+            } else if (node.Data < Key) {
+                node.Right = delete(node.Right, Key);
             } else {
-                if (node.left == null || node.right == null) {
-                    node = (node.left == null) ? node.right : node.left;
+                if (node.Left == null || node.Right == null) {
+                    node = (node.Left == null) ? node.Right : node.Left;
                 } else {
-                    AVLTreeNode mostLeftChild = this.mostLeftChild(node.right);
-                    node.data = mostLeftChild.data;
-                    node.right = delete(node.right, node.data);
+                    AVLTreeNode mostLeftChild = this.mostLeftChild(node.Right);
+                    node.Data = mostLeftChild.Data;
+                    node.Right = delete(node.Right, node.Data);
                 }
             }
             if (node != null) {
@@ -208,18 +208,18 @@ namespace DatastructureAlgorithms.AVLTree
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="Key"></param>
         /// <returns></returns>
-        public AVLTreeNode Find(int key) 
+        public AVLTreeNode Find(int Key) 
         {
-            AVLTreeNode current = this.root;
+            AVLTreeNode current = this.Root;
 
             do
             {
-                if (current.data == key) 
+                if (current.Data == Key) 
                     break;
 
-                current = key > current.data ? current.right : current.left;
+                current = Key > current.Data ? current.Right : current.Left;
             }while(current != null);
             
             return current;

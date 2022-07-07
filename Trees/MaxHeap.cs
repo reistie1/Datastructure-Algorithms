@@ -5,20 +5,20 @@ namespace DatastructureAlgorithms.MaxHeap
 {
     public class MaxHeaps
     {
-        public TreeNode root;
+        public TreeNode Root;
         public MaxHeaps()
         {
-            this.root = null;
+            this.Root = null;
         }
 
-        public void Insert(int key)
+        public void Insert(int Key)
         {
-            this.root = InsertNode(this.root, key);
+            this.Root = InsertNode(this.Root, Key);
         }
 
         public void InOrder()
         {
-            InOrderTraversal(this.root);
+            InOrderTraversal(this.Root);
         }
 
         private void InOrderTraversal(TreeNode node)
@@ -31,46 +31,46 @@ namespace DatastructureAlgorithms.MaxHeap
             }            
         }
 
-        public TreeNode InsertNode(TreeNode node, int key)
+        public TreeNode InsertNode(TreeNode node, int Key)
         {
             if(node == null)
             {
-                return new TreeNode(key);
+                return new TreeNode(Key);
             }
             if(node.Left == null)
             {
-                if(key > node.Key)
+                if(Key > node.Key)
                 {
                     node.Left = new TreeNode(node.Key);
-                    node.Key = key;
+                    node.Key = Key;
                 }
                 else
                 {
-                    node.Left = new TreeNode(key);
+                    node.Left = new TreeNode(Key);
                 }
                 return node;
             }
             if(node.Right == null)
             {
-                if(key > node.Key)
+                if(Key > node.Key)
                 {
                     node.Right = new TreeNode(node.Key);
-                    node.Key = key;
+                    node.Key = Key;
                 }
                 else
                 {
-                    node.Right = new TreeNode(key);
+                    node.Right = new TreeNode(Key);
                 }
                 return node;
             }
 
             if(node.Left != null)
             {
-                node.Left = InsertNode(node.Left, key);
+                node.Left = InsertNode(node.Left, Key);
             }
             else if(node.Right != null)
             {
-                node.Right = InsertNode(node.Right, key);
+                node.Right = InsertNode(node.Right, Key);
             }
 
 

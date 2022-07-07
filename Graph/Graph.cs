@@ -45,28 +45,28 @@ namespace DatastructureAlgorithms.Graphs
         /// </summary>
         public void DepthFirstSearch()
         {
-            Stacks<T> stack = new Stacks<T>();
+            Stacks<T> Stack = new Stacks<T>();
             var currentNode = _nodeSet.FirstOrDefault().Value;
 
-            stack.Push(currentNode._identifier);
+            Stack.Push(currentNode._identifier);
             currentNode.SetVisited(true); 
 
             do
             {
-                stack.ToList();
+                Stack.ToList();
                 if(!currentNode.connections.Any(c => c.getVisitStatus() == false))
                 {
-                    stack.Pop();
-                    currentNode = _nodeSet[stack.Peek().value]; 
+                    Stack.Pop();
+                    currentNode = _nodeSet[Stack.Peek().Value]; 
                 }
                 else
                 {
                     currentNode = currentNode.connections.Where(c => c._isVisited == false)?.FirstOrDefault().GetCurrentNode();
 
                     currentNode.SetVisited(true);
-                    stack.Push(currentNode._identifier);
+                    Stack.Push(currentNode._identifier);
                 }
-            }while(!stack.isEmpty());
+            }while(!Stack.isEmpty());
         } 
 
         /// <summary>
@@ -74,22 +74,22 @@ namespace DatastructureAlgorithms.Graphs
         /// </summary>
         public void BreadthFirstSearch()
         {
-            Queues<T> queue = new Queues<T>();
+            Queues<T> Queue = new Queues<T>();
             GraphNode<T> firstNode = _nodeSet.FirstOrDefault().Value;
-            T temp = null;
+            T Temp = null;
 
-            //add firstnode to end of queue and mark node as visited
-            queue.Enqueue(temp);
+            //add firstnode to end of Queue and mark node as visited
+            Queue.Enqueue(Temp);
             firstNode.SetVisited(true);
 
-            while(!queue.isEmpty())
+            while(!Queue.IsEmpty())
             {
-                queue.ToList();
+                Queue.ToList();
 
                 if(!firstNode.connections.Any(c => c.getVisitStatus() == false))
                 {
-                    queue.Dequeue();
-                    firstNode = _nodeSet[queue.Peek().value];
+                    Queue.DeQueue();
+                    firstNode = _nodeSet[Queue.Peek().Value];
                 }
                 else
                 {
@@ -103,12 +103,12 @@ namespace DatastructureAlgorithms.Graphs
                         {
                             firstNode = _nodeSet[nodeList[i].GetIdentifier()];
                             nodeList[i].SetVisited(true);
-                            queue.Enqueue(nodeList[i].GetIdentifier());
+                            Queue.Enqueue(nodeList[i].GetIdentifier());
                         }while(i-- > 0);
                     }
 
-                    queue.Dequeue();
-                    firstNode = _nodeSet[queue.Peek().value];
+                    Queue.DeQueue();
+                    firstNode = _nodeSet[Queue.Peek().Value];
                 }
             }
         }
