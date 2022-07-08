@@ -21,13 +21,13 @@ namespace DatastructureAlgorithms.HashTables
             if(_hashtable[HashKey] == null)
             {
                 LinkedLists<T> NewList = new LinkedLists<T>();
-                NewList.InsertAtEnd(Key);
+                NewList.InsertEnd(Key);
 
                 _hashtable[HashKey] = NewList;
             }
             else
             {
-                _hashtable[HashKey].InsertAtEnd(Key);
+                _hashtable[HashKey].InsertEnd(Key);
             }
         }  
 
@@ -37,7 +37,7 @@ namespace DatastructureAlgorithms.HashTables
 
             if(_hashtable[HashKey] != null)
             {
-                var Result = _hashtable[HashKey].Search(Key)?.Value;
+                var Result = _hashtable[HashKey].Get(Key)?.Value;
                 if(Result != null)
                 {
                     return true;
@@ -52,7 +52,7 @@ namespace DatastructureAlgorithms.HashTables
 
             if(_hashtable[HashKey] != null)
             {
-                _hashtable[HashKey].DeleteNode(Key);
+                _hashtable[HashKey].Delete(Key);
             }
         }
 
@@ -62,7 +62,7 @@ namespace DatastructureAlgorithms.HashTables
 
             if(_hashtable[HashKey] != null)
             {
-                return _hashtable[HashKey].Search(Key).Value;
+                return _hashtable[HashKey].Get(Key).Value;
             }
 
             return null;
@@ -97,7 +97,7 @@ namespace DatastructureAlgorithms.HashTables
 
             if(_hashtable[HashKey] != null)
             {
-                return _hashtable[HashKey].Find(Key);
+                return _hashtable[HashKey].Contains(Key);
             }
             return false;
         }
@@ -149,7 +149,7 @@ namespace DatastructureAlgorithms.HashTables
             {
                 if(_hashtable[i] != null)
                 {
-                    _hashtable[i].PrintList();
+                    _hashtable[i].Print();
                 }
             }
         }

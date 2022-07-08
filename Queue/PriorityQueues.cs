@@ -22,7 +22,7 @@ namespace DatastructureAlgorithms.Queue
 
             foreach(var item in List)
             {
-                Queue.InsertAtEnd(item);
+                Queue.InsertEnd(item);
             }
         }
 
@@ -31,9 +31,9 @@ namespace DatastructureAlgorithms.Queue
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> EnQueue(T Value)
+        public ListNode<T> Enqueue(T Value)
         {
-            return Queue.InsertAtEnd(Value);
+            return Queue.InsertEnd(Value);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>
         public ListNode<T> Peek()
         {
-            return Queue.Head;
+            return Queue.Peek();
         }
 
         /// <summary>
@@ -51,8 +51,8 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>    
         public T DeQueue()
         {
-            return Queue.RemoveFromStart().Value;
-            
+            // return Queue.RemoveFromStart().Value;
+                return null;
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>
         public int Length()
         {
-            return Queue.Size;
+            return Queue.Size();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace DatastructureAlgorithms.Queue
         /// </summary>
         public void ToList()
         {
-            Queue.PrintList();
+            Queue.Print();
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>
         public bool isEmpty()
         {
-            return Queue.Size == 0;
+            return Queue.Size() == 0;
         }
     }
 }

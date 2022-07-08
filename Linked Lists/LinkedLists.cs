@@ -5,13 +5,13 @@ namespace DatastructureAlgorithms.Linked_List
 {
     public class LinkedLists<T> where T : class
     {
-        public ListNode<T> Head;
-        public ListNode<T> Tail;
-        public int Size;
+        private ListNode<T> Head;
+        private ListNode<T> Tail;
+        private int size;
         public LinkedLists()
         {
             this.Head = this.Tail = null;
-            this.Size = 0;
+            this.size = 0;
         }
 
         /// <summary>
@@ -21,13 +21,50 @@ namespace DatastructureAlgorithms.Linked_List
         /// <returns></returns>
         public ListNode<T> CreateList(T[] List)
         {
-            int index = 0;
-
-            do
+            for(int i = 0; i < List.Length; i++)
             {
-                this.InsertAtEnd(List[index++]);
-                this.Size++;
-            }while(index <= List.Length - 1);
+                this.InsertEnd(List[i]);
+                this.size++;
+            }
+
+            return this.Head;
+        }
+
+        public ListNode<T> InsertStart(T Value)
+        {
+            ListNode<T> NewNode = new ListNode<T>(Value);
+
+            if(this.Head == null)
+            {
+                this.Head = this.Tail = NewNode;
+            }
+            else
+            {
+                NewNode.Next = this.Head;
+                this.Head = NewNode;
+            }
+
+            this.size++;
+            
+            return this.Head;
+        }
+
+        public ListNode<T> InsertEnd(T Value)
+        {
+            ListNode<T> NewNode = new ListNode<T>(Value);
+            ListNode<T> Current = this.Head;
+
+            if(Current == null)
+            {
+                this.Head = this.Tail = NewNode;
+            }
+            else
+            {
+                this.Tail.Next = NewNode;
+                this.Tail = NewNode;
+            }
+
+            this.size++;
 
             return this.Head;
         }
@@ -37,14 +74,12 @@ namespace DatastructureAlgorithms.Linked_List
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> Search(T Value)
+        public ListNode<T> Get(T Value)
         {
             ListNode<T> Current = this.Head;
 
             if(Current == null)
-            {
                 return null;
-            }
 
             if(Current.Value == Value)
             {
@@ -61,14 +96,12 @@ namespace DatastructureAlgorithms.Linked_List
             }
         }
 
-        public bool Find(T Value)
+        public bool Contains(T Value)
         {
             ListNode<T> Current = this.Head;
 
             if(Current == null)
-            {
                 return false;
-            }
 
             do
             {
@@ -78,69 +111,35 @@ namespace DatastructureAlgorithms.Linked_List
             return true;
         }
 
-        public ListNode<T> InsertAtStart(T Value)
+        public void Update(T Value, T NewValue)
         {
-            ListNode<T> NewNode = new ListNode<T>(Value);
-
-            if(this.Head == null)
+            if(this.Contains(Value))
             {
-                this.Head = this.Tail = NewNode;
-            }
-            else
-            {
-                NewNode.Next = this.Head;
-                this.Head = NewNode;
-            }
+                ListNode<T> Curr = this.Get(Value);
 
-            this.Size++;
-            
-            return this.Head;
+                Curr.Value = NewValue;
+            }
         }
 
-        public ListNode<T> InsertAtEnd(T Value)
-        {
-            ListNode<T> NewNode = new ListNode<T>(Value);
-            ListNode<T> Current = this.Head;
-
-            if(Current == null)
-            {
-                this.Head = this.Tail = NewNode;
-            }
-            else if(Current == this.Tail)
-            {
-                this.Head.Next = NewNode;
-                this.Tail = NewNode;
-            }
-            else
-            {
-                this.Tail.Next = NewNode;
-            }
-
-            this.Size++;
-
-            return this.Head;
-        }
-
+       
         /// <summary>
         /// 
         /// </summary>
-        public void PrintList()
+        public void Print()
         {
-            ListNode<T> Temp = this.Head;
-            string result = "";
+            ListNode<T> Current = this.Head;
+            string Result = "";
 
-            if(Temp == null)
-            {
+            if(Current == null)
                 return;
-            }
             
             do
             {
-                result += $"{Temp.Value} -> "; 
-                Temp = Temp.Next;
-            }while(Temp != null);
+                Result += $"{Current.Value} -> "; 
+                Current = Current.Next;
+            }while(Current != null);
 
-            Console.WriteLine(result); 
+            Console.WriteLine(Result); 
         }
 
         /// <summary>
@@ -148,7 +147,7 @@ namespace DatastructureAlgorithms.Linked_List
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> DeleteNode(T Value)
+        public ListNode<T> Delete(T Value)
         {
             ListNode<T> Prev = null;
             ListNode<T> Curr = this.Head;
@@ -164,7 +163,7 @@ namespace DatastructureAlgorithms.Linked_List
                     this.Head = this.Head.Next;
                     Curr.Next = null;
                 }
-                this.Size--;
+                this.size--;
                 return this.Head;
             }
 
@@ -176,63 +175,9 @@ namespace DatastructureAlgorithms.Linked_List
 
             Prev.Next = Curr.Next;
             Curr.Next = null;
-            this.Size--;
+            this.size--;
 
             return this.Head;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ListNode<T> RemoveFromStart()
-        {
-            
-            if(this.Head.Next != null)
-            {
-                var Temp = this.Head;
-                
-                this.Head = this.Head.Next;
-                Temp.Next = null;
-                this.Size--;
-
-                return this.Head;
-            }
-            else
-            {
-                this.Head = null;
-                this.Size = 0;
-            }
-
-            return this.Head;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ListNode<T> RemoveFromEnd()
-        {
-            
-            ListNode<T> Current = this.Head;
-            ListNode<T> Prev = null;
-
-            if(Current == null)
-            {
-                return Current;
-            }
-            
-            do
-            {
-                Prev = Current;
-                Current = Current.Next;
-            }while(Current.Next != null);
-
-            Prev.Next = null;
-            this.Tail = Prev;
-            this.Size--;
-
-            return Current;
         }
 
         /// <summary>
@@ -248,9 +193,18 @@ namespace DatastructureAlgorithms.Linked_List
         /// 
         /// </summary>
         /// <returns></returns>
-        public int GetSize()
+        public int Size()
         {
-            return this.Size;
+            return this.size;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty()
+        {
+            return this.Head == null || this.Tail == null ? true : false;
         }
     }
 }

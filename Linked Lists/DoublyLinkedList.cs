@@ -1,14 +1,33 @@
-using System;
 using Datastructures_LinkedList;
+using System;
 
 namespace DatastructureAlgorithms.DoublyLinkedList
 {
-    public class DoublyLinkedLists<T> where T : class
+    public class DoublyLinkedList<T> where T : class
     {
         public ListNode<T> Head;
-        public DoublyLinkedLists()
+        public ListNode<T> Tail;
+        public int size;
+        public DoublyLinkedList()
         {
-            Head = null;
+            this.Head = this.Tail = null;
+            this.size = 0;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="List"></param>
+        /// <returns></returns>
+        public ListNode<T> CreateList(T[] List)
+        {
+            for(int i = 0; i < List.Length; i++)
+            {
+                this.InsertEnd(List[i++]);
+                this.size++;
+            }
+
+            return this.Head;
         }
 
         /// <summary>
@@ -16,21 +35,28 @@ namespace DatastructureAlgorithms.DoublyLinkedList
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T>  InsertAtStart(T Value)
+        public ListNode<T> Get(T Value)
         {
-            if(this.Head == null)
+            ListNode<T> Current = this.Head;
+
+            if(Current == null)
             {
-                this.Head = new ListNode<T>(Value);
+                return null;
+            }
+
+            if(Current.Value == Value)
+            {
+                return Current;
             }
             else
             {
-                ListNode<T> newNode = new ListNode<T>(Value);
-                newNode.Next = this.Head;
-                this.Head.Prev = newNode;
-                this.Head = newNode;
-            }
+                do
+                {
+                    Current = Current.Next;
+                }while(Current != null && !Current.Value.Equals(Value));
 
-            return this.Head;
+                return Current;
+            }
         }
 
         /// <summary>
@@ -38,109 +64,92 @@ namespace DatastructureAlgorithms.DoublyLinkedList
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public T Search(T Value)
+        public bool Contains(T Value)
         {
-            ListNode<T> current = this.Head;
+            ListNode<T> Current = this.Head;
+
+            if(Current == null)
+                return false;
+
+            do
+            {
+                Current = Current.Next;
+            }while(Current != null && !Current.Value.Equals(Value));
+
+            return true;
+        }
+
+        public ListNode<T> InsertStart(T Value)
+        {
+            ListNode<T> NewNode = new ListNode<T>(Value);
 
             if(this.Head == null)
             {
-                return null;
+                this.Head = this.Tail = NewNode;
+            }
+            else
+            {
+                NewNode.Next = this.Head;
+                this.Head = NewNode;
             }
 
-            do
-            {
-                current = current.Next;
-            }while(current != null && !current.Value.Equals(Value));
-
+            this.size++;
             
-            if(current == null)
+            return this.Head;
+        }
+
+        public ListNode<T> InsertEnd(T Value)
+        {
+            ListNode<T> NewNode = new ListNode<T>(Value);
+            ListNode<T> Current = this.Head;
+
+            if(Current == null)
             {
-                return null;
+                this.Head = this.Tail = NewNode;
+            }
+            else
+            {
+                NewNode.Prev = this.Tail;
+                this.Tail = NewNode;
             }
 
-            return current.Value;
+            this.size++;
+
+            return this.Head;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public ListNode<T>  DeleteStart()
+        public void Print()
         {
             ListNode<T> Temp = this.Head;
+            string result = "";
 
-            this.Head = this.Head.Next;
-            this.Head.Prev = null;
-            Temp.Next = null;
-
-            return this.Head;            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Value"></param>
-        /// <returns></returns>
-        public ListNode<T> InsertAtEnd(T Value)
-        {
-            ListNode<T> current = this.Head;
-            ListNode<T> newNode = new ListNode<T>(Value);
-            
-            while(current.Next != null)
+            if(Temp == null)
             {
-                current = current.Next;
+                return;
             }
-
-            current.Next = newNode;
-            newNode.Prev = current;
             
-            return this.Head;
-        }
-
-        public ListNode<T> DeleteLast()
-        {
-            ListNode<T> Prev = null;
-            ListNode<T> curr = this.Head;
-
             do
             {
-                Prev = curr;
-                curr = curr.Next;
-            }while(curr.Next != null);
+                result += $"{Temp.Value} -> "; 
+                Temp = Temp.Next;
+            }while(Temp != null);
 
-            Prev.Next = null;
-            curr.Prev = null; 
-
-            return this.Head;
+            Console.WriteLine(result); 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Value"></param>
-        /// <param name="newValue"></param>
-        /// <returns></returns>
-        public ListNode<T> InsertAfter(T Value, T newValue)
+        public void Update(T Value, T NewValue)
         {
-            ListNode<T> Prev = null;
-            ListNode<T> curr = this.Head;
-            ListNode<T> newNode = new ListNode<T>(newValue);
-
-            do
+            if(this.Contains(Value))
             {
-                Prev = curr;
-                curr = curr.Next;
-            }while(Prev.Value != Value);
+                ListNode<T> Curr = this.Get(Value);
 
-            Prev.Next = newNode;
-            newNode.Next = curr;
-            newNode.Prev = Prev;
-            curr.Prev = newNode;
-
-            return this.Head;
+                Curr.Value = NewValue;
+            }
+        }
         
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -149,35 +158,35 @@ namespace DatastructureAlgorithms.DoublyLinkedList
         public ListNode<T> Delete(T Value)
         {
             ListNode<T> Prev = null;
-            ListNode<T> curr = this.Head;
+            ListNode<T> Curr = this.Head;
 
-            if(this.Head.Value == Value)
+            if(Curr.Value == Value)
             {
-                this.Head = this.Head.Next;
-                this.Head.Prev = null;
-                curr.Next = null;
-
+                if(this.Head.Next == null)
+                {
+                    this.Head = null;
+                }
+                else
+                {
+                    this.Head = this.Head.Next;
+                    this.Head.Next.Prev = null;
+                    Curr.Next = null;
+                }
+                this.size--;
                 return this.Head;
             }
 
             do
             {
-                Prev = curr;
-                curr = curr.Next;
-            }while(curr.Value != Value);
+                Prev = Curr;
+                Curr = Curr.Next;
+            }while(Curr.Value != Value);
 
-            if(curr.Next == null)
-            {
-                Prev.Next = null;
-                curr.Prev = null;
+            Prev.Next = Curr.Next;
+            Curr.Next.Prev = Prev;
+            Curr.Next = Curr.Prev = null;
 
-                return this.Head;
-            }
-
-            Prev.Next = curr.Next;
-            curr.Next.Prev = Prev;
-            curr.Next = null;
-            curr.Prev = null;
+            this.size--;
 
             return this.Head;
         }
@@ -185,40 +194,28 @@ namespace DatastructureAlgorithms.DoublyLinkedList
         /// <summary>
         /// 
         /// </summary>
-        public void PrintForward()
+        /// <returns></returns>
+        public ListNode<T> Peek()
         {
-            ListNode<T> Temp = this.Head;
-            string result = "";
-
-            while(Temp != null)
-            {
-                result += Temp.Value + " -> ";
-                Temp = Temp.Next;
-            }
-            Console.WriteLine(result);
+            return this.Head;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void PrintInReverse()
+        /// <returns></returns>
+        public int Size()
         {
-            ListNode<T> Temp = this.Head;
-            string result = "";
-
-            while(Temp.Next != null)
-            {
-                Temp = Temp.Next;
-            }
-
-            while(Temp != null)
-            {
-                result += Temp.Value + " -> ";
-                Temp = Temp.Prev;
-            }
-            Console.WriteLine(result);
+            return this.size;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty()
+        {
+            return this.Head == null || this.Tail == null ? true : false;
+        }
     }
 }

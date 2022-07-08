@@ -19,7 +19,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public ListNode<T> Push(T Value)
         {
-            return Stack.InsertAtStart(Value);
+            return Stack.InsertStart(Value);
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public ListNode<T> Peek()
         {
-            return Stack.Head;
+            return Stack.Peek();
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace DatastructureAlgorithms.Stack
         /// </summary>
         public void Pop()
         {
-            Stack.RemoveFromStart();
+            //Stack.RemoveFromStart();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public int Length()
         {
-            return Stack.Size;
+            return Stack.Size();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace DatastructureAlgorithms.Stack
         /// </summary>
         public void ToList()
         {
-            Stack.PrintList();
+            Stack.Print();
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace DatastructureAlgorithms.Stack
         /// <returns></returns>
         public bool isEmpty()
         {
-            return Stack.Size == 0;
+            return Stack.Size() == 0;
         }
     }
 }
