@@ -17,6 +17,7 @@ using System.Linq;
 using DatastructureAlgorithms.HashTables;
 using System.Collections.Generic;
 using DatastructureAlgorithms.WeightedGraphs;
+using DatastructureAlgorithms.PriorityItem;
 
 namespace DatastructureAlgorithms
 {
@@ -24,12 +25,7 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            LinkedLists<string> list = new LinkedLists<string>();
-
-            list.CreateList(new string[]{"adam", "noah", "sydney", "mark", "taylor"});
-            list.Update("adam", "roger");
-            Console.WriteLine(list.Get("taylor")?.Value);
-            list.Print();
+            //PriorityQueues<PriorityItem<int>> priorityQueue;
             // WeightedGraph<string> weightGraph = new WeightedGraph<string>();
             // var s = weightGraph.AddNode("S");
             // var a = weightGraph.AddNode("A");

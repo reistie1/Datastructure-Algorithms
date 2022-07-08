@@ -53,7 +53,7 @@ namespace DatastructureAlgorithms.Graphs
 
             do
             {
-                Stack.ToList();
+                Stack.Print();
                 if(!currentNode.connections.Any(c => c.getVisitStatus() == false))
                 {
                     Stack.Pop();
@@ -66,7 +66,7 @@ namespace DatastructureAlgorithms.Graphs
                     currentNode.SetVisited(true);
                     Stack.Push(currentNode._identifier);
                 }
-            }while(!Stack.isEmpty());
+            }while(!Stack.IsEmpty());
         } 
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace DatastructureAlgorithms.Graphs
 
             while(!Queue.IsEmpty())
             {
-                Queue.ToList();
+                Queue.Print();
 
                 if(!firstNode.connections.Any(c => c.getVisitStatus() == false))
                 {

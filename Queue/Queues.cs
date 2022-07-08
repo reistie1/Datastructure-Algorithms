@@ -16,13 +16,13 @@ namespace DatastructureAlgorithms.Queue
         /// 
         /// </summary>
         /// <param name="List"></param>
-        public Queues(List<T> List)
+        public Queues(T[] List)
         {
             Queue = new LinkedLists<T>();
 
-            foreach(var item in List)
+            for(var i = 0; i < List.Length; i++)
             {
-                Queue.InsertEnd(item);
+                Queue.InsertEnd(List[i]);
             }
         }
 
@@ -51,8 +51,7 @@ namespace DatastructureAlgorithms.Queue
         /// <returns></returns>    
         public T DeQueue()
         {
-           // return Queue.RemoveFromStart().Value;
-            return null;
+            return Queue.RemoveStart();
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace DatastructureAlgorithms.Queue
         /// <summary>
         /// 
         /// </summary>
-        public void ToList()
+        public void Print()
         {
             Queue.Print();
         }

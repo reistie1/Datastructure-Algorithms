@@ -1,28 +1,29 @@
 using System.Collections.Generic;
-using DatastructureAlgorithms.Linked_List;
+using DatastructureAlgorithms.PriorityItem;
+using DatastructureAlgorithms.PriorityLinkedList;
 using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.Queue
 {
-    public class PriorityQueues<T> where T : class
+    public class PriorityQueues<T> where T : PriorityItem<T>
     {
-        public LinkedLists<T> Queue;
+        public PriorityLinkedLists<T> Queue;
         public PriorityQueues()
         {
-            Queue = new LinkedLists<T>();
+            Queue = new PriorityLinkedLists<T>();
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="List"></param>
-        public PriorityQueues(List<T> List)
+        public PriorityQueues(PriorityItem<T>[] List)
         {
-            Queue = new LinkedLists<T>();
+            Queue = new PriorityLinkedLists<T>();
 
             foreach(var item in List)
             {
-                Queue.InsertEnd(item);
+                Queue.Insert(item);
             }
         }
 
@@ -31,16 +32,16 @@ namespace DatastructureAlgorithms.Queue
         /// </summary>
         /// <param name="Value"></param>
         /// <returns></returns>
-        public ListNode<T> Enqueue(T Value)
+        public void Enqueue(PriorityItem<T> Value)
         {
-            return Queue.InsertEnd(Value);
+            Queue.Insert(Value);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public ListNode<T> Peek()
+        public ListNode<PriorityItem<T>> Peek()
         {
             return Queue.Peek();
         }
@@ -49,10 +50,9 @@ namespace DatastructureAlgorithms.Queue
         /// 
         /// </summary>
         /// <returns></returns>    
-        public T DeQueue()
+        public PriorityItem<T> DeQueue()
         {
-            // return Queue.RemoveFromStart().Value;
-                return null;
+            return Queue.RemoveStart();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace DatastructureAlgorithms.Queue
         /// <summary>
         /// 
         /// </summary>
-        public void ToList()
+        public void Print()
         {
             Queue.Print();
         }
@@ -76,7 +76,7 @@ namespace DatastructureAlgorithms.Queue
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool isEmpty()
+        public bool IsEmpty()
         {
             return Queue.Size() == 0;
         }
