@@ -46,12 +46,19 @@ namespace DatastructureAlgorithms.Linked_List
                 return null;
             }
 
-            do
+            if(Current.Value == Value)
             {
-                Current = Current.Next;
-            }while(Current != null && !Current.Value.Equals(Value));
+                return Current;
+            }
+            else
+            {
+                do
+                {
+                    Current = Current.Next;
+                }while(Current != null && !Current.Value.Equals(Value));
 
-            return Current;
+                return Current;
+            }
         }
 
         public bool Find(T Value)
@@ -98,16 +105,20 @@ namespace DatastructureAlgorithms.Linked_List
             if(Current == null)
             {
                 this.Head = this.Tail = NewNode;
-                this.Size++;
-
-                return this.Tail;
+            }
+            else if(Current == this.Tail)
+            {
+                this.Head.Next = NewNode;
+                this.Tail = NewNode;
+            }
+            else
+            {
+                this.Tail.Next = NewNode;
             }
 
-            this.Tail.Next = NewNode;
-            this.Tail = NewNode;
             this.Size++;
 
-            return this.Tail;
+            return this.Head;
         }
 
         /// <summary>

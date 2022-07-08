@@ -24,17 +24,15 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            LinkedLists<string> List = new LinkedLists<string>();
+            HashTable<string> Table = new HashTable<string>(1500);
 
-            List.InsertAtStart("Josh");
-            List.InsertAtEnd("Adam");
-            List.InsertAtEnd("Noah");
-            List.InsertAtEnd("Sydney");
-    
-            Console.WriteLine(List.Peek().Value);
+            Table.Insert("noah");
+            Table.Insert("tayloronious");
+            Table.Insert("josh");
 
-            List.PrintList();
-            //Console.WriteLine(List.Search("Sydney"));
+            Table.Remove("josh");
+            Console.WriteLine(Table.ContainsValue("josh"));
+
             // WeightedGraph<string> weightGraph = new WeightedGraph<string>();
             // var s = weightGraph.AddNode("S");
             // var a = weightGraph.AddNode("A");

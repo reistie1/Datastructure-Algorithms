@@ -5,89 +5,153 @@ using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.HashTables
 {
-    public class HashTable<T> where T : class
+    public class HashTable<T> where T: class
     {
         private LinkedLists<T>[] _hashtable; 
-        public HashTable()
+        public HashTable(int Size)
         {
-            _hashtable = new LinkedLists<T>[1000];
-        }
+            _hashtable = new LinkedLists<T>[Size];
+        }   
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Key"></param>
-        /// <param name="Value"></param>
-        public void Insert(int Key, T Value)
+        public void Insert(T Key)
         {
-            int hashKey = this.Hash(Key);
-            Console.WriteLine(hashKey);
+            int HashKey = this.GenerateHashKey(this.GetTypeValue(Key));
+            Console.WriteLine(HashKey);
 
-            if(_hashtable[hashKey].Find(Value))
+            if(_hashtable[HashKey] == null)
             {
-                _hashtable[hashKey].InsertAtEnd(Value);
+                LinkedLists<T> NewList = new LinkedLists<T>();
+                NewList.InsertAtEnd(Key);
+
+                _hashtable[HashKey] = NewList;
             }
             else
             {
-                _hashtable[hashKey] = new LinkedLists<T>();
-                _hashtable[hashKey].InsertAtEnd(Value);
-            } 
-        }
+                _hashtable[HashKey].InsertAtEnd(Key);
+            }
+        }  
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Key"></param>
-        /// <param name="Value"></param>
-        public ListNode<T> GetValue(int Key, T Value)
+        public bool ContainsValue(T Key)
         {
-            int hashKey = this.Hash(Key);
-            
-            return _hashtable[hashKey].Search(Value);
+            int HashKey = this.GenerateHashKey(this.GetTypeValue(Key));
 
+            if(_hashtable[HashKey] != null)
+            {
+                var Result = _hashtable[HashKey].Search(Key)?.Value;
+                if(Result != null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Key"></param>
-        /// <param name="Value"></param>
-        public void Delete(int Key, T Value)
+        public void Remove(T Key)
         {
-            int hashKey = this.Hash(Key);
-            _hashtable[hashKey].DeleteNode(Value);
+            int HashKey = this.GenerateHashKey(this.GetTypeValue(Key));
 
+            if(_hashtable[HashKey] != null)
+            {
+                _hashtable[HashKey].DeleteNode(Key);
+            }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Key"></param>
-        /// <returns></returns>
-        private int Hash(int Key)
+        public T GetValue(T Key)
         {
-            int length = Key.ToString().Length;
+            int HashKey = this.GenerateHashKey(this.GetTypeValue(Key));
 
-            return Convert.ToInt32(length * (Key * 25 % 509));
+            if(_hashtable[HashKey] != null)
+            {
+                return _hashtable[HashKey].Search(Key).Value;
+            }
+
+            return null;
         }
 
-        // /// <summary>
-        // /// 
-        // /// </summary>
-        // /// <returns></returns>
-        // public override string ToString()
-        // {
-        //     string result = "";
+        public int Size()
+        {
+            int Size = 0;
 
-        //     foreach(var item in _hashtable)
-        //     {
-        //         if(item.Value.Head != null)
-        //         {
-        //             item.Value.PrintList();
+            for(var i = 0; i < _hashtable.Length; i++)
+            {
+                if(_hashtable[i] != null)
+                {
+                    Size++;
+                }
+            }
 
-        //         }
-        //     }
-        //     return result; 
-        // }
+            return Size;
+        } 
+
+        public void Clear()
+        {
+            for(var i = 0; i < _hashtable.Length; i++)
+            {
+                _hashtable[i] = null;
+            }
+        }
+
+        public bool Contains(T Key)
+        {
+            int HashKey = this.GenerateHashKey(this.GetTypeValue(Key));
+
+            if(_hashtable[HashKey] != null)
+            {
+                return _hashtable[HashKey].Find(Key);
+            }
+            return false;
+        }
+
+        public bool ContainsKey(T Key)
+        {
+            int HashKey = this.GenerateHashKey(this.GetTypeValue(Key));
+
+            if(_hashtable[HashKey] != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsEmpty()
+        {
+            for(var i = 0; i < _hashtable.Length; i++)
+            {
+                if(_hashtable[i] != null)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private int GetTypeValue(T Key)
+        {
+            int KeyNumber = 0;
+
+            foreach(var item in Key.ToString())
+            {
+                KeyNumber += (int)item;
+            }
+
+            return KeyNumber;
+        }
+
+        private int GenerateHashKey(int Key)
+        {
+            return (Key * 52) % 509;
+        } 
+
+        public void PrintEachHashBucket()
+        {
+            for(int i = 0; i < _hashtable.Length; i++)
+            {
+                if(_hashtable[i] != null)
+                {
+                    _hashtable[i].PrintList();
+                }
+            }
+        }
     }
 }
