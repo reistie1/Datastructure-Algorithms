@@ -18,6 +18,7 @@ namespace DatastructureAlgorithms.MaxHeap
 
         private int Parent(int position)
         {
+            Console.WriteLine(position + " " + (position - 1) / 2);
             return (position - 1) / 2;
         }
 
