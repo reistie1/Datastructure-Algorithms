@@ -5,7 +5,7 @@ using DatastructureAlgorithms.PriorityItem;
 
 namespace DatastructureAlgorithms.PriorityLinkedList
 {
-    public class PriorityLinkedLists<T> where T : PriorityItem<T>
+    public class PriorityLinkedLists<T> where T : class
     {
         private ListNode<PriorityItem<T>> Head;
         private ListNode<PriorityItem<T>> Tail;
@@ -42,16 +42,26 @@ namespace DatastructureAlgorithms.PriorityLinkedList
             {
                 Curr = NewNode;
                 this.Head = this.Tail = Curr;
+                this.size++;
+                return;
+            }
+            if(NewItem.Priority < Curr.Value.Priority)
+            {
+                NewNode.Next = this.Head;
+                this.Head = NewNode;
+                this.size++;
+                return;
             }
             
             do
             {
                 Prev = Curr;
                 Curr = Curr.Next;
-            }while(Curr.Next != null && Curr.Value.Priority < NewItem.Priority);
+            }while(Curr != null && Curr.Value.Priority <= NewItem.Priority);
 
             Prev.Next = NewNode;
             NewNode.Next = Curr;
+            this.size++;
         }
 
        
@@ -115,30 +125,31 @@ namespace DatastructureAlgorithms.PriorityLinkedList
                 this.Head = this.Head.Next;
                 Curr.Next = null;
             }
+            this.size--;
 
             return Curr?.Value;
         }
 
-        public PriorityItem<T> RemoveEnd()
-        {
-            ListNode<PriorityItem<T>> Curr = this.Head;
-            ListNode<PriorityItem<T>> Prev = null;
+        // public PriorityItem<T> RemoveEnd()
+        // {
+        //     ListNode<PriorityItem<T>> Curr = this.Head;
+        //     ListNode<PriorityItem<T>> Prev = null;
 
-            if(Curr == null)
-            {
-                return null;
-            }
+        //     if(Curr == null)
+        //     {
+        //         return null;
+        //     }
 
-            do
-            {
-                Prev = Curr;
-                Curr = Curr.Next;
-            }while(Curr.Next != null);
+        //     do
+        //     {
+        //         Prev = Curr;
+        //         Curr = Curr.Next;
+        //     }while(Curr.Next != null);
 
-            Prev.Next = null;
+        //     Prev.Next = null;
 
-            return Curr?.Value;
-        }
+        //     return Curr?.Value;
+        // }
 
         public void Update(PriorityItem<T> Value, PriorityItem<T> NewValue)
         {
@@ -164,7 +175,7 @@ namespace DatastructureAlgorithms.PriorityLinkedList
             
             do
             {
-                Result += $"{Current.Value} -> "; 
+                Result += $"{Current.Value.Value} -> "; 
                 Current = Current.Next;
             }while(Current != null);
 

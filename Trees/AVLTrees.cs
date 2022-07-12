@@ -120,7 +120,8 @@ namespace DatastructureAlgorithms.AVLTree
                 {
                     z = RotateLeft(z);
                 }
-                else {
+                else 
+                {
                     z.Right = RotateRight(z.Right);
                     z = RotateLeft(z);
                 }

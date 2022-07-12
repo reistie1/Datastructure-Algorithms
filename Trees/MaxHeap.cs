@@ -5,76 +5,99 @@ namespace DatastructureAlgorithms.MaxHeap
 {
     public class MaxHeaps
     {
-        public TreeNode Root;
-        public MaxHeaps()
+        private int[] Heap;
+        private int Size;
+        private int MaxSize;
+
+        public MaxHeaps(int maxSize)
         {
-            this.Root = null;
+            this.MaxSize = maxSize;
+            this.Size = 0;
+            this.Heap = new int[maxSize];
         }
 
-        public void Insert(int Key)
+        private int Parent(int position)
         {
-            this.Root = InsertNode(this.Root, Key);
+            return (position - 1) / 2;
         }
 
-        public void InOrder()
+        private int LeftChild(int position)
         {
-            InOrderTraversal(this.Root);
+            return (2 * position) + 1;
         }
 
-        private void InOrderTraversal(TreeNode node)
+        private int RightChild(int position)
         {
-            if(node != null)
-            {
-                InOrderTraversal(node.Left);
-                Console.WriteLine(node.Key + " ");
-                InOrderTraversal(node.Right);
-            }            
+            return (2 * position) + 2;
         }
 
-        public TreeNode InsertNode(TreeNode node, int Key)
+        private bool IsLeaf(int position)
         {
-            if(node == null)
-            {
-                return new TreeNode(Key);
+            return (position > (this.Size / 2) && position <= this.Size) ? true : false;
+        }
+
+        private void Swap(int FirstPosition, int SecondPosition)
+        {
+            int Temp = this.Heap[FirstPosition];
+            this.Heap[FirstPosition] = this.Heap[SecondPosition];
+            this.Heap[SecondPosition] = Temp;
+
+        }
+
+        private void MaxHeapify(int Position)
+        {
+            if (this.IsLeaf(Position))
+                return;
+    
+            if (this.Heap[Position] < this.Heap[this.LeftChild(Position)] || this.Heap[Position] < this.Heap[this.RightChild(Position)]) {
+    
+                if (this.Heap[this.LeftChild(Position)] > this.Heap[this.RightChild(Position)]) {
+                    this.Swap(Position, this.LeftChild(Position));
+                    this.MaxHeapify(this.LeftChild(Position));
+                }
+                else {
+                    this.Swap(Position, this.RightChild(Position));
+                    this.MaxHeapify(this.RightChild(Position));
+                }
             }
-            if(node.Left == null)
-            {
-                if(Key > node.Key)
-                {
-                    node.Left = new TreeNode(node.Key);
-                    node.Key = Key;
-                }
-                else
-                {
-                    node.Left = new TreeNode(Key);
-                }
-                return node;
-            }
-            if(node.Right == null)
-            {
-                if(Key > node.Key)
-                {
-                    node.Right = new TreeNode(node.Key);
-                    node.Key = Key;
-                }
-                else
-                {
-                    node.Right = new TreeNode(Key);
-                }
-                return node;
+        }
+
+        public void Insert(int Element)
+        {
+            this.Heap[this.Size] = Element;
+            int Current = this.Size;
+
+            while (Heap[Current] > Heap[this.Parent(Current)]) {
+                this.Swap(Current, this.Parent(Current));
+                Current = this.Parent(Current);
             }
 
-            if(node.Left != null)
-            {
-                node.Left = InsertNode(node.Left, Key);
-            }
-            else if(node.Right != null)
-            {
-                node.Right = InsertNode(node.Right, Key);
-            }
+            this.Size++;
+        }
 
+        public int ExtractMax()
+        {
+            int Max = this.Heap[0];
+            this.Heap[0] = Heap[--this.Size];
+            this.MaxHeapify(0);
 
-            return node;
+            return Max;
+        }
+
+        public void Print()
+        {
+            for(int i = 0; i < this.Size / 2; i++)
+            {
+                Console.WriteLine("Parent Node : " + Heap[i] );
+                
+                if(this.LeftChild(i) < this.Size) //if the child is out of the bound of the array
+                    Console.WriteLine( " Left Child Node: " + Heap[this.LeftChild(i)]);
+                
+                if(this.RightChild(i) < this.Size) //if the right child index must not be out of the index of the array
+                    Console.WriteLine(" Right Child Node: "+ Heap[this.RightChild(i)]);
+                
+                    Console.WriteLine(); //for new line 
+            }
         }
     }
 }

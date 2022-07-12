@@ -5,7 +5,7 @@ using Datastructures_LinkedList;
 
 namespace DatastructureAlgorithms.Queue
 {
-    public class PriorityQueues<T> where T : PriorityItem<T>
+    public class PriorityQueues<T> where T : class
     {
         public PriorityLinkedLists<T> Queue;
         public PriorityQueues()
@@ -50,7 +50,7 @@ namespace DatastructureAlgorithms.Queue
         /// 
         /// </summary>
         /// <returns></returns>    
-        public PriorityItem<T> DeQueue()
+        public PriorityItem<T> Dequeue()
         {
             return Queue.RemoveStart();
         }

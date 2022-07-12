@@ -1,8 +1,10 @@
 {
     "cSpell.ignoreWords": [
-        "algorithm",
         "Array",
+        "algorithm",
+        "heapify",
         "kruskal",
+        "max",
         "sortings",
         "xRoot",
         "yRoot"

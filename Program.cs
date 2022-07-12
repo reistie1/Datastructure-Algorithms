@@ -18,6 +18,8 @@ using DatastructureAlgorithms.HashTables;
 using System.Collections.Generic;
 using DatastructureAlgorithms.WeightedGraphs;
 using DatastructureAlgorithms.PriorityItem;
+using DatastructureAlgorithms.PriorityLinkedList;
+using DatastructureAlgorithms.MinHeap;
 
 namespace DatastructureAlgorithms
 {
@@ -25,7 +27,48 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            //PriorityQueues<PriorityItem<int>> priorityQueue;
+            MinHeaps minHeap = new MinHeaps(20);
+            minHeap.Insert(5);
+            minHeap.Insert(3);
+            minHeap.Insert(17);
+            minHeap.Insert(10);
+            minHeap.Insert(84);
+            minHeap.Insert(19);
+            minHeap.Insert(6);
+            minHeap.Insert(22);
+            minHeap.Insert(9);
+            minHeap.Print();
+            Console.WriteLine(minHeap.ExtractMin());
+
+            MaxHeaps maxHeaps = new MaxHeaps(20);
+            maxHeaps.Insert(5);
+            maxHeaps.Insert(3);
+            maxHeaps.Insert(17);
+            maxHeaps.Insert(10);
+            maxHeaps.Insert(84);
+            maxHeaps.Insert(19);
+            maxHeaps.Insert(6);
+            maxHeaps.Insert(22);
+            maxHeaps.Insert(9);
+            maxHeaps.Print();
+            Console.WriteLine(maxHeaps.ExtractMax());
+            // PriorityQueues<string> queue = new PriorityQueues<string>();
+            // queue.Enqueue(new PriorityItem<string>("josh",4));
+            // queue.Enqueue(new PriorityItem<string>("roger",2));
+            // queue.Enqueue(new PriorityItem<string>("cameron",1));
+            // queue.Enqueue(new PriorityItem<string>("bob",3));
+            // queue.Enqueue(new PriorityItem<string>("martin",2));
+            // queue.Print();
+            // Console.WriteLine(queue.Dequeue().Value);
+            // queue.Print();
+            // queue.Enqueue(new PriorityItem<string>("albert", 20));
+            // queue.Print();
+            // queue.Enqueue(new PriorityItem<string>("matt", 10));
+            // queue.Print();
+            // Console.WriteLine(queue.Length());
+
+            
+
             // WeightedGraph<string> weightGraph = new WeightedGraph<string>();
             // var s = weightGraph.AddNode("S");
             // var a = weightGraph.AddNode("A");
