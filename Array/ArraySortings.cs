@@ -1,3 +1,5 @@
+using System;
+
 namespace DatastructureAlgorithms.ArraySorting
 {
     public static class ArraySortings
@@ -131,6 +133,57 @@ namespace DatastructureAlgorithms.ArraySorting
             }
 
             return arr;
+        }
+
+        public static int Partition(int[] arr, int low, int high)
+        {
+            int pivot = arr[high];
+            int i = (low - 1);	   
+
+            for (int j = low; j <= high - 1; j++)
+            {
+                if (arr[j] < pivot)
+                {
+                    i++;
+                    Swap(arr, i, j);
+                }
+            }
+
+            Swap(arr, i + 1, high);
+
+            return (i + 1);
+        }
+
+        public static void Swap(int[] arr, int i1, int i2)
+        {
+            int t = arr[i1];
+            arr[i1] = arr[i2];
+            arr[i2] = t;
+        }
+
+        public static int[] QuickSort(int[] arr, int low, int high)
+        {
+            if (low < high)
+            {
+                int pi = Partition(arr, low, high);
+                PrintArray(arr);
+
+
+                QuickSort(arr, low, pi - 1);
+                QuickSort(arr, pi + 1, high);
+            }
+
+            return arr;
+        }
+
+        public static void PrintArray(int[] arr)
+        {
+            for(var i = 0; i < arr.Length; i++)
+            {
+                Console.WriteLine(arr[i]);
+            }
+
+            Console.WriteLine();
         }
     }
 }

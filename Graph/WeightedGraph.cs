@@ -205,8 +205,6 @@ namespace DatastructureAlgorithms.WeightedGraphs
         /// <returns></returns>
         public List<GraphNode<T>> PrimsAlgorithm()
         {
-
-            
             Dictionary<GraphNode<T>, bool> msSet = new Dictionary<GraphNode<T>, bool>();
             Dictionary<GraphNode<T>, int> Keys = new Dictionary<GraphNode<T>, int>();
             List<GraphNode<T>> result = new List<GraphNode<T>>();
@@ -218,20 +216,23 @@ namespace DatastructureAlgorithms.WeightedGraphs
             }
 
             Keys[_nodeSet.First()] = 0;
-            msSet[_nodeSet.First()] = true;
+            result.Add(new GraphNode<T>(null));
 
-            for(var i = 0; i < VerticesCount - 1; i++)
+            for(var i = 0; i < _nodeSet.Count - 1; i++)
             {
-                GraphNode<T> u = MinKey(Keys, msSet);
-                //msSet[u] = true;
+                // GraphNode<T> u = MinKey(Keys, msSet); 
+                // msSet[u] = true;
 
-                for(int j = 0; j < VerticesCount; j++)
-                {
-                    
-                }
+                // foreach(var item in _nodeSet)
+                // {
+                //     if (msSet[item] == false && graph[u, v] < Keys[item]) 
+                //     {
+                //         result.Add(u);
+                //         Keys[item] = graph[u, v];
+                //     }
+                // }
 
             }
-
 
             return result;
         }
@@ -244,23 +245,6 @@ namespace DatastructureAlgorithms.WeightedGraphs
         /// <returns></returns>
         public GraphNode<T> MinKey(Dictionary<GraphNode<T>, int> Key, Dictionary<GraphNode<T>, bool> msSet)
         {
-            
-            // if(_adjacencyList.Where(c => c.Key == Key[]))
-            // {
-
-            // }
-            // foreach(var item in _adjacencyList)
-            // {
-            //     var List = item.Value.ToList();
-            //     var result = "";
-            //     foreach(var NextItem in List)
-            //     {
-            //         result = result + $"{item.Key} {NextItem._identifier} {NextItem._weight} -->";
-            //     }
-            //     Console.WriteLine(result);
-            // }
-
-
 
             return null;
         }

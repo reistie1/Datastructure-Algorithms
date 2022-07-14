@@ -27,6 +27,15 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
+            int[] arr = new int[]{45,83,1,90,57,483,21,54};
+            var result = ArraySortings.QuickSort(arr, 0, arr.Count() - 1);
+
+            // for(var t = 0; t < result.Count(); t++)
+            // {
+            //     Console.WriteLine(arr[t]);
+            // }
+            
+            
             // MinHeaps minHeap = new MinHeaps(20);
             // minHeap.Insert(5);
             // minHeap.Insert(3);
@@ -66,15 +75,15 @@ namespace DatastructureAlgorithms
             // queue.Enqueue(new PriorityItem<string>("matt", 10));
             // queue.Print();
             // Console.WriteLine(queue.Length());
-            int[] arr = new int[]{14,56,86,3,23,75,37,98};
-            //
-            arr.Append(14);
-            var result = ArraySortings.MergeSort(arr, 0, arr.Length - 1);
+            // int[] arr = new int[]{14,56,86,3,23,75,37,98};
+            
+            // arr.Append(14);
+            // var result = ArraySortings.MergeSort(arr, 0, arr.Length - 1);
 
-            for(var i = 0; i <result.Length;i++)
-            {
-                Console.WriteLine(result[i]);
-            }
+            // for(var i = 0; i <result.Length;i++)
+            // {
+            //     Console.WriteLine(result[i]);
+            // }
 
             
 
