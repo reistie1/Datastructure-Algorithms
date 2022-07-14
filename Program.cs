@@ -28,12 +28,12 @@ namespace DatastructureAlgorithms
         static void Main(string[] args)
         {
             int[] arr = new int[]{45,83,1,90,57,483,21,54};
-            var result = ArraySortings.QuickSort(arr, 0, arr.Count() - 1);
+            ArraySortings.HeapSort(arr);
 
-            // for(var t = 0; t < result.Count(); t++)
-            // {
-            //     Console.WriteLine(arr[t]);
-            // }
+            for(var t = 0; t < arr.Length; t++)
+            {
+                Console.WriteLine(arr[t]);
+            }
             
             
             // MinHeaps minHeap = new MinHeaps(20);
