@@ -27,13 +27,13 @@ namespace DatastructureAlgorithms
     {
         static void Main(string[] args)
         {
-            int[] arr = new int[]{45,83,1,90,57,483,21,54};
-            ArraySortings.HeapSort(arr);
+            // int[] arr = new int[]{45,83,1,90,57,483,21,54};
+            // ArraySortings.HeapSort(arr);
 
-            for(var t = 0; t < arr.Length; t++)
-            {
-                Console.WriteLine(arr[t]);
-            }
+            // for(var t = 0; t < arr.Length; t++)
+            // {
+            //     Console.WriteLine(arr[t]);
+            // }
             
             
             // MinHeaps minHeap = new MinHeaps(20);
@@ -87,7 +87,14 @@ namespace DatastructureAlgorithms
 
             
 
-            // WeightedGraph<string> weightGraph = new WeightedGraph<string>();
+            WeightedGraph<string> weightGraph = new WeightedGraph<string>();
+            int[, ] graph = new int[, ] { { 0, 2, 0, 6, 0 },
+                                      { 2, 0, 3, 8, 5 },
+                                      { 0, 3, 0, 0, 7 },
+                                      { 6, 8, 0, 0, 9 },
+                                      { 0, 5, 7, 9, 0 } };
+
+            weightGraph.PrimsAlgorithm(graph, 5);
             // var s = weightGraph.AddNode("S");
             // var a = weightGraph.AddNode("A");
             // var b = weightGraph.AddNode("B");

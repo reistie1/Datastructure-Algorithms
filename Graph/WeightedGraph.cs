@@ -203,38 +203,41 @@ namespace DatastructureAlgorithms.WeightedGraphs
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<GraphNode<T>> PrimsAlgorithm()
+        public void PrimsAlgorithm(int[, ] graph, int Size)
         {
-            Dictionary<GraphNode<T>, bool> msSet = new Dictionary<GraphNode<T>, bool>();
-            Dictionary<GraphNode<T>, int> Keys = new Dictionary<GraphNode<T>, int>();
-            List<GraphNode<T>> result = new List<GraphNode<T>>();
+           // Array to store constructed MST
+            int[] parent = new int[Size];
+            int[] key = new int[Size];
+            bool[] mstSet = new bool[Size];
 
-            foreach(var node in _nodeSet)
+            for (int i = 0; i < Size; i++) 
             {
-                msSet.Add(node, false);
-                Keys.Add(node, int.MaxValue);
+                key[i] = int.MaxValue;
+                mstSet[i] = false;
+            }
+  
+            key[0] = 0;
+            parent[0] = -1;
+  
+            // The MST will have V vertices
+            for (int count = 0; count < Size - 1; count++) 
+            {
+
+                int u = MinKey(key, mstSet, Size);
+    
+                mstSet[u] = true;
+    
+                for (int v = 0; v < Size; v++)
+                {
+                    if (graph[u, v] != 0 && mstSet[v] == false && graph[u, v] < key[v]) 
+                    {
+                        parent[v] = u;
+                        key[v] = graph[u, v];
+                    }
+                }
             }
 
-            Keys[_nodeSet.First()] = 0;
-            result.Add(new GraphNode<T>(null));
-
-            for(var i = 0; i < _nodeSet.Count - 1; i++)
-            {
-                // GraphNode<T> u = MinKey(Keys, msSet); 
-                // msSet[u] = true;
-
-                // foreach(var item in _nodeSet)
-                // {
-                //     if (msSet[item] == false && graph[u, v] < Keys[item]) 
-                //     {
-                //         result.Add(u);
-                //         Keys[item] = graph[u, v];
-                //     }
-                // }
-
-            }
-
-            return result;
+            printMST(parent, graph, Size);
         }
 
         /// <summary>
@@ -243,10 +246,27 @@ namespace DatastructureAlgorithms.WeightedGraphs
         /// <param name="Key"></param>
         /// <param name="mstSet"></param>
         /// <returns></returns>
-        public GraphNode<T> MinKey(Dictionary<GraphNode<T>, int> Key, Dictionary<GraphNode<T>, bool> msSet)
+        public int MinKey(int[] key, bool[] mstSet, int Size)
         {
+            int min = int.MaxValue, min_index = -1;
+            
+            for (int v = 0; v < Size; v++)
+            {
+                if (mstSet[v] == false && key[v] < min) 
+                {
+                    min = key[v];
+                    min_index = v;
+                }
+            }
+            
+            return min_index;
+        }
 
-            return null;
+        public void printMST(int[] parent, int[, ] graph, int Size)
+        {
+            Console.WriteLine("Edge \tWeight");
+            for (int i = 1; i < Size; i++)
+                Console.WriteLine(parent[i] + " - " + i + "\t" + graph[i, parent[i]]);
         }
     }
 }
